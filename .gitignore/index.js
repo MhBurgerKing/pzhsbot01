@@ -4,7 +4,7 @@ var prefix = ("x-");
 bot.login(process.env.TOKEN);
 
 bot.on("ready", function() {
-    bot.user.setActivity("x-help")
+    bot.user.setActivity(`x-help | ${bot.guilds.size} serveurs`)
     console.log("Connected");
 
 bot.on("message", function(message) {
@@ -31,7 +31,7 @@ bot.on("message", function(message) {
                 .setDescription(`${message.author.username}, Voici la liste des commandes:`)
                 .addField(`Divertissement`, "` \n x-8ball \n x-roll`", true)
                 .addField("Utilitaire", "` x-avatar \n x-serverinfo \n x-botinfo \n x-id \n x-ping`", true)
-                .addField(`Modération`, "` x-ban \n x-kick \n x-mute`", true)
+                .addField(`Modération`, "` x-ban \n x-kick \n x-clear`", true)
                 .addField(`Administration`, "` x-sondage \n x-say`", true)
                 .setFooter(`Xonaria`)
                 .setTimestamp()
@@ -40,13 +40,13 @@ bot.on("message", function(message) {
         break;
         case "say":
             message.delete();
-            let modRole = message.guild.roles.find("name", "Admins");
+            if(!message.member.hasPermission("ADMINISTRATOR")) {
             if(message.member.roles.has(modRole.id)) {
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ")
             message.channel.sendMessage(thingToEcho)
         } else {
-            message.reply(`tu n'as pas la permission de faire cette commande.`)}
+            message.reply(`tu n'as pas la permission de faire cette commande.`)}}
         break;
         case "serverinfo":
     var embedee = new Discord.RichEmbed()
@@ -55,19 +55,23 @@ bot.on("message", function(message) {
         .addField("Crée le", message.guild.createdAt)
         .addField("Tu as rejoin le", message.member.joinedAt)
         .addField("Utilisateurs sur le discord", message.guild.memberCount)
+        .addField("Nombre de channels sur ce discord", `${message.guild.channels.size}`)
         .setColor("0xFE2E64")
     message.channel.sendEmbed(embedee)
         break;
         case "sondage":
-        if(message.author.id == "330762245921439754"){
+        if (message.member.hasPermission("MANAGE_MESSAGES")) {
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ")
+            if (!thingToEcho) return message.reply("Merci d'envoyer une question pour le sondage")
+            if (!message.guild.channels.find("name", "sondage")) return message.reply("Le channel sondage est introuvable. merci de crée ce channel pour que celui-ci marche.")
             var embedeee = new Discord.RichEmbed()
                 .setDescription("Sondage")
                 .addField(thingToEcho, "Répondre avec :white_check_mark: ou :x:")
                 .setColor("0xB40404")
                 .setTimestamp()
         message.guild.channels.find("name", "sondage").sendEmbed(embedeee)
+        message.channel.sendMessage("Votre sondage a bien été envoyé dans #sondage.")
         .then(function (message) {
             message.react("✅")
             message.react("❌")
@@ -163,10 +167,12 @@ bot.on("message", function(message) {
             message.channel.sendMessage(":x: Cette commande n'existe pas.")
         case "botinfo":
             var embedbot = new Discord.RichEmbed()
-                .setDescription("BotInfo")
-                .addField("Nombre de channels sur ce discord", `${message.guild.channels.size}`)
-                .addField("Nombre de membre", `${bot.users.size}`)
+                .setDescription("Information")
                 .addField("Nombre de discord sur lequel je suis", `${bot.guilds.size}`)
+                .addField("Crée par", "[PZH#8058](https://www.youtube.com/c/pzhcodage)")
+                .addField("Crée le", "31/03/2018")
+                .addField("Version", "1.0.0")
+                .setColor("0x81DAF5")
             message.channel.sendEmbed(embedbot)
 
 }})})
