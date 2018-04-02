@@ -30,7 +30,7 @@ bot.on("message", function(message) {
             var embede = new Discord.RichEmbed()
                 .setDescription(`${message.author.username}, Voici la liste des commandes:`)
                 .addField(`Divertissement`, "` \n x-8ball \n x-roll`", true)
-                .addField("Utilitaire", "` x-avatar \n x-serverinfo \n x-botinfo \n x-id \n x-ping`", true)
+                .addField("Utilitaire", "` x-avatar \n x-serverinfo \n x-botinfo \n x-id \n x-ping \n x-invite`", true)
                 .addField(`Modération`, "` x-ban \n x-kick \n x-clear`", true)
                 .addField(`Administration`, "` x-sondage \n x-say`", true)
                 .setFooter(`Xonaria`)
@@ -162,6 +162,7 @@ bot.on("message", function(message) {
         case "invite":
             var invembed = new Discord.RichEmbed()
             .setDescription("Invite moi sur ton serveur: https://discordapp.com/oauth2/authorize?client_id=427432036152770560&scope=bot&permissions=359005431")
+           message.channel.sendEmbed(invembed)
         break;
         default:
             message.channel.sendMessage(":x: Cette commande n'existe pas.")
