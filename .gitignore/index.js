@@ -1,93 +1,172 @@
 const Discord = require('discord.js');
-const bot = new Discord.Client();
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
-const client = new Discord.Client();
-
-const adapter = new FileSync('database.json');
-const db = low(adapter);
-
-db.defaults({ histoires: [], xp: []}).write()
-
-var prefix = ("/")
-
-bot.on('ready', function() {
-    bot.user.setGame("/help");
-    console.log("Connecté");
-});
-
-bot.on("guildMemberAdd", member => {
-    member.guild.channels.find("name", "general").send(`${member.user.username} vient de rejoindre le serveur ! Bienvenue :)`)
-})
-
-bot.on("guildMemberRemove", member =>{
-    member.guild.channels.find("name", "general").send(`${member.user.username} vien de quitter le serveur ! bye bye... :|`)
-})
-
+var bot = new Discord.Client();
+var prefix = ("x-");
 bot.login(process.env.TOKEN);
 
+bot.on("ready", function() {
+    bot.user.setActivity("x-help")
+    console.log("Connected");
 
-bot.on('message', message => {
-
-   if (message.content === prefix + "help"){
-        var embed = new Discord.RichEmbed()
-            .setTitle("==========( Help Menu )==========")
-            .setDescription("This bot is in development")
-            .addField("/invit", "Bot invitation link", true)
-            .addField("/xp", "Your xp stats", true)
-            .addField("/setlang", "Set language of bot ! | OFFLINE", true)
-            .addField("/serverlist", "View all servers list with this bot | OFFLINE", true)
-            .addField("/music", "Play your YouTube music :D | OFFLINE", true)
-            .setColor("0x006600")
-            .setFooter("Bot develop by Kadurio_Kodu#8058")
-        message.channel.sendEmbed(embed);
-
-   }
+bot.on("message", function(message) {
+    if (message.author.equals(bot.user)) return;
     
-   var msgauthor = message.author.id;
-   
-    if(message.author.bot)return;
-   
-    if(!db.get("xp").find({user: msgauthor}).value()){
-        db.get("xp").push({user: msgauthor, xp: 1}).write();
-    }else{
-        var userxpdb = db.get("xp").filter({user: msgauthor}).find('xp').value();
-        console.log(userxpdb);
-        var userxp = Object.values(userxpdb)
-        console.log(userxp)
-        console.log(`XP Number: ${userxp[1]}`)
-   
-        db.get("xp").find({user: msgauthor}).assign({user: msgauthor, xp: userxp[1] += 1}).write();
-   
-    if (message.content === prefix + "xp"){
-        var xp = db.get("xp").filter({user: msgauthor}).find('xp').value()
-        var xpfinal = Object.values(xp);
-        var xp_embed = new Discord.RichEmbed()
-            .setTitle(`XP Statistic of ${message.author.username}`)
-            .setColor('0x04B4AE')
-            .setDescription("View your XP stats !")
-            .addField("XP:", `${xpfinal[1]} xp`)
-            .setFooter("Bot develop by Kadurio_Kodu#8058")
-        message.channel.send({embed: xp_embed});
-
-    }
-
-    if (message.content === prefix + "invit"){
-        var embed = new Discord.RichEmbed()
-            .setTitle("Bot invitation link")
-            .addField("Hello, this is the bot invitation link", "[> Click Here <](https://discordapp.com/oauth2/authorize?client_id=413669340345270272&scope=bot&permissions=536083539)")
-            .setFooter("For your safety, don't invit this bot in your discord for the time being, the bot is in development | Develop by Kadurio_Kodu#8058")
-            .setColor("0x0101DF")
-        message.channel.sendEmbed(embed);
-
-    }
-
-    if (message.content === prefix + "music"){
-        var embed = new Discord.RichEmbed()
-            .setTitle("Music Menu")
-            .addField("WARNING !", "Sorry ! This option is OFFLINE.", true)
-            .setFooter("Develop by Kadurio_Kodu#8058")
-            .setColor("0xFE2E2E")
-        message.channel.sendEmbed(embed);
+    if (!message.content.startsWith(prefix)) return;
     
-}}})
+    var args = message.content.substring(prefix.length).split(" ");
+    
+    switch (args[0].toLowerCase()) {
+        case "avatar":
+        if (!message.mentions.users.first()) return message.channel.send("Merci de mentionner un utilisateur")
+            let user = message.mentions.users.first() ? message.mentions.users.first() : message.author
+            let ava = user.displayAvatarURL
+            let embed = {
+            color:0x000000,
+            description:"Avatar de "+user.username+"",
+            image:{url:ava}
+            }
+        message.channel.send("", {embed})
+        break;
+        case "help":
+            var embede = new Discord.RichEmbed()
+                .setDescription(`${message.author.username}, Voici la liste des commandes:`)
+                .addField(`Divertissement`, "` \n x-8ball \n x-roll`", true)
+                .addField("Utilitaire", "` x-avatar \n x-serverinfo \n x-botinfo \n x-id \n x-ping`", true)
+                .addField(`Modération`, "` x-ban \n x-kick \n x-mute`", true)
+                .addField(`Administration`, "` x-sondage \n x-say`", true)
+                .setFooter(`Xonaria`)
+                .setTimestamp()
+                .setColor("0xDF7401")
+            message.channel.sendEmbed(embede)
+        break;
+        case "say":
+            message.delete();
+            let modRole = message.guild.roles.find("name", "Admins");
+            if(message.member.roles.has(modRole.id)) {
+            let args = message.content.split(" ").slice(1);
+            let thingToEcho = args.join(" ")
+            message.channel.sendMessage(thingToEcho)
+        } else {
+            message.reply(`tu n'as pas la permission de faire cette commande.`)}
+        break;
+        case "serverinfo":
+    var embedee = new Discord.RichEmbed()
+        .setDescription("Server info")
+        .addField("Nom du Discord", message.guild.name)
+        .addField("Crée le", message.guild.createdAt)
+        .addField("Tu as rejoin le", message.member.joinedAt)
+        .addField("Utilisateurs sur le discord", message.guild.memberCount)
+        .setColor("0xFE2E64")
+    message.channel.sendEmbed(embedee)
+        break;
+        case "sondage":
+        if(message.author.id == "330762245921439754"){
+            let args = message.content.split(" ").slice(1);
+            let thingToEcho = args.join(" ")
+            var embedeee = new Discord.RichEmbed()
+                .setDescription("Sondage")
+                .addField(thingToEcho, "Répondre avec :white_check_mark: ou :x:")
+                .setColor("0xB40404")
+                .setTimestamp()
+        message.guild.channels.find("name", "sondage").sendEmbed(embedeee)
+        .then(function (message) {
+            message.react("✅")
+            message.react("❌")
+        }).catch(function() {
+        });
+        }else{
+            return message.reply("Tu n'as pas la permission.")}
+        break;
+        case "kick":
+        let command = message.content.split(" ")[0];
+        const args = message.content.slice(prefix.length).split(/ +/);
+        command = args.shift().toLowerCase();
+
+            if(!message.member.hasPermission("KICK_MEMBERS")) {
+                return message.reply("Tu n'as pas la permission de faire cette commande.").catch(console.error);
+            }
+            if(message.mentions.users.size === 0) {
+                return message.reply("Merci de mentionner l'utilisateur à expluser.").catch(console.error);
+            }
+            let kickMember = message.guild.member(message.mentions.users.first());
+            if(!kickMember) {
+                return message.reply("Cet utilisateur est introuvable ou impossible à expulser.")
+            }
+            if(!message.guild.member(bot.user).hasPermission("KICK_MEMBERS")) {
+                return message.reply("Je n'ai pas la permission KICK_MEMBERS pour faire ceci.").catch(console.error);
+            }
+            kickMember.kick().then(member => {
+                message.reply(`${member.user.username} a été expulsé avec succès.`).catch(console.error);
+                message.guild.channels.find("name", "general").send(`**${member.user.username}** a été expulsé du discord par **${message.author.username}**`)
+            }).catch(console.error)
+        break;
+        case "ban":
+        let commande = message.content.split(" ")[0];
+        const argse = message.content.slice(prefix.length).split(/ +/);
+        commande = argse.shift().toLowerCase();
+        if(!message.member.hasPermission("BAN_MEMBERS")) {
+            return message.reply("Tu n'as pas la permission de faire cette commande.").catch(console.error);
+        }
+        const member = message.mentions.members.first();
+        if (!member) return message.reply("Merci de mentionner l'utilisateur à bannir.");
+        member.ban().then(member => {
+            message.reply(`${member.user.username} a été banni avec succès.`).catch(console.error);
+            message.guild.channels.find("name", "general").send(`**${member.user.username}** a été banni du discord par **${message.author.username}**`)
+        }).catch(console.error)
+        break;
+        case "roll":
+            var roll = Math.floor(Math.random() * args[1]) +1;
+            if (!roll) return message.reply("Entre un numéro.")
+            message.channel.send("Je choisis le numéro " + roll + " !");
+        break;
+        case "8ball":
+        let argsed = message.content.split(" ").slice(1);
+        let tte = argsed.join(" ")
+        if (!tte){
+            return message.reply("Merci de poser une question. :8ball:")};
+
+            var replys = [
+            "Oui.",
+            "Non.",
+            "Je ne sais pas.",
+            "Peut-être.",
+            "Probablement."
+            ];
+        
+            let reponse = (replys[Math.floor(Math.random() * replys.length)])
+            var ballembed = new Discord.RichEmbed()
+            .setDescription(":8ball: 8ball")
+            .addField("Question", tte)
+            .addField("Réponse", reponse)
+            .setColor("0x40FF00")
+        message.channel.sendEmbed(ballembed)
+            break;
+        case "id":
+            var idembed = new Discord.RichEmbed()
+                .setDescription(`Votre IDENTIFIANT/ID est ${message.author.id}`)
+            message.channel.sendEmbed(idembed)
+            break;
+        case "ping":
+            message.channel.sendMessage('Temp de latence avec le serveur: `' + `${message.createdTimestamp - Date.now()}` + ' ms`');
+            break;
+        case "clear":
+        if (message.member.hasPermission("MANAGE_MESSAGES")) {
+            message.channel.fetchMessages()
+               .then(function(list){
+                    message.channel.bulkDelete(list);
+                }, function(err){message.channel.send("Erreur")})}
+            break;
+        case "invite":
+            var invembed = new Discord.RichEmbed()
+            .setDescription("Invite moi sur ton serveur: https://discordapp.com/oauth2/authorize?client_id=427432036152770560&scope=bot&permissions=359005431")
+        break;
+        default:
+            message.channel.sendMessage(":x: Cette commande n'existe pas.")
+        case "botinfo":
+            var embedbot = new Discord.RichEmbed()
+                .setDescription("BotInfo")
+                .addField("Nombre de channels sur ce discord", `${message.guild.channels.size}`)
+                .addField("Nombre de membre", `${bot.users.size}`)
+                .addField("Nombre de discord sur lequel je suis", `${bot.guilds.size}`)
+            message.channel.sendEmbed(embedbot)
+
+}})})
