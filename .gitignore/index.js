@@ -40,13 +40,12 @@ bot.on("message", function(message) {
         break;
         case "say":
             message.delete();
-            if(!message.member.hasPermission("ADMINISTRATOR")) {
-            if(message.member.roles.has(modRole.id)) {
+            if(message.member.hasPermission("ADMINISTRATOR")) {
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ")
             message.channel.sendMessage(thingToEcho)
         } else {
-            message.reply(`tu n'as pas la permission de faire cette commande.`)}}
+            message.reply(`tu n'as pas la permission de faire cette commande.`)}
         break;
         case "serverinfo":
     var embedee = new Discord.RichEmbed()
@@ -70,8 +69,8 @@ bot.on("message", function(message) {
                 .addField(thingToEcho, "Répondre avec :white_check_mark: ou :x:")
                 .setColor("0xB40404")
                 .setTimestamp()
-        message.guild.channels.find("name", "sondage").sendEmbed(embedeee)
         message.channel.sendMessage("Votre sondage a bien été envoyé dans #sondage.")
+        message.guild.channels.find("name", "sondage").sendEmbed(embedeee)
         .then(function (message) {
             message.react("✅")
             message.react("❌")
