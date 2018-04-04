@@ -39,8 +39,8 @@ bot.on("message", function(message) {
             message.channel.sendEmbed(embede)
         break;
         case "say":
-            message.delete();
             if(message.member.hasPermission("ADMINISTRATOR")) {
+            message.delete();
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ")
             message.channel.sendMessage(thingToEcho)
