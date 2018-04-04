@@ -1,7 +1,12 @@
 const Discord = require('discord.js');
 var bot = new Discord.Client();
 var prefix = ("x-");
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+const adapter = new FileSync('database.json');
+const db = low(adapter);
 bot.login(process.env.TOKEN);
+db.defaults({ histoires: [], xp: []}).write()
 
 bot.on("ready", function() {
     bot.user.setActivity(`x-help | ${bot.guilds.size} serveurs`)
@@ -30,7 +35,7 @@ bot.on("message", function(message) {
             var embede = new Discord.RichEmbed()
                 .setDescription(`${message.author.username}, Voici la liste des commandes:`)
                 .addField(`Divertissement`, "` \n x-8ball \n x-roll`", true)
-                .addField("Utilitaire", "` x-avatar \n x-serverinfo \n x-botinfo \n x-id \n x-ping \n x-invite`", true)
+                .addField("Utilitaire", "` x-avatar \n x-profil \n x-serverinfo \n x-botinfo \n x-id \n x-ping \n x-invite`", true)
                 .addField(`Modération`, "` x-ban \n x-kick \n x-clear`", true)
                 .addField(`Administration`, "` x-sondage \n x-say`", true)
                 .setFooter(`Xonaria`)
@@ -163,8 +168,6 @@ bot.on("message", function(message) {
             .setDescription("Invite moi sur ton serveur: https://discordapp.com/oauth2/authorize?client_id=427432036152770560&scope=bot&permissions=359005431")
            message.channel.sendEmbed(invembed)
         break;
-        default:
-            message.channel.sendMessage(":x: Cette commande n'existe pas.")
         case "botinfo":
             var embedbot = new Discord.RichEmbed()
                 .setDescription("Information")
@@ -174,5 +177,37 @@ bot.on("message", function(message) {
                 .addField("Version", "1.0.0")
                 .setColor("0x81DAF5")
             message.channel.sendEmbed(embedbot)
+        break;
+                
 
 }})})
+bot.on("message", message => {
+
+var msgauthor = message.author.id;
+
+    if(message.author.bot)return;
+    
+    if(!db.get("xp").find({user: msgauthor}).value()){
+        db.get("xp").push({user: msgauthor, xp: 1}).write();
+    }else{
+        var userxpdb = db.get("xp").filter({user: msgauthor}).find('xp').value();
+        console.log(userxpdb);
+        var userxp = Object.values(userxpdb)
+        console.log(userxp)
+        console.log(`Nombre d'xp : ${userxp[1]}`)
+    
+        db.get("xp").find({user: msgauthor}).assign({user: msgauthor, xp: userxp[1] += 1}).write();
+
+if (message.content === prefix + "profil") {
+    var xp = db.get("xp").filter({user: msgauthor}).find('xp').value()
+    var xpfinal = Object.values(xp);
+    var statembed = new Discord.RichEmbed()
+    .setDescription("Profil")
+    .addField("Ton pseudo", `${message.author.tag}`, true)
+    .addField("Ton identifiant", `${message.author.id}`, true)
+    .addField("Tu as rejoin le", `${message.member.joinedAt}`, true)
+    .addField("Nombre de message envoyé", `${xpfinal[1]}`, true)
+    .setColor("0xFF0040")
+message.channel.sendEmbed(statembed)
+
+}}})
