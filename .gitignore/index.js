@@ -9,7 +9,7 @@ bot.login(process.env.TOKEN);
 db.defaults({ histoires: [], xp: []}).write()
 
 bot.on("ready", function() {
-    bot.user.setActivity(`x-help | ${bot.guilds.size} serveurs`)
+    bot.user.setActivity(`x-help | ${bot.guilds.size} serveurs | ${bot.users.size} utilisateurs`)
     console.log("Connected");
 
 bot.on("message", function(message) {
