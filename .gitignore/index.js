@@ -34,7 +34,7 @@ bot.on("message", function(message) {
         case "help":
             var embede = new Discord.RichEmbed()
                 .setDescription(`${message.author.username}, Voici la liste des commandes:`)
-                .addField(`Divertissement`, "` \n x-8ball \n x-roll`", true)
+                .addField(`Divertissement`, "` \n x-8ball`", true)
                 .addField("Utilitaire", "` x-avatar \n x-profil \n x-serverinfo \n x-botinfo \n x-id \n x-ping \n x-invite \n x-support`", true)
                 .addField(`Modération`, "` x-ban \n x-kick \n x-clear`", true)
                 .addField(`Administration`, "` x-sondage \n x-say`", true)
@@ -52,7 +52,7 @@ bot.on("message", function(message) {
                 .setTimestamp()
                 .setColor("0xDF7401")
             message.channel.sendEmbed(embedef)
-
+           break;
         case "say":
             if(message.member.hasPermission("ADMINISTRATOR")) {
             message.delete();
