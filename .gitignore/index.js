@@ -35,14 +35,24 @@ bot.on("message", function(message) {
             var embede = new Discord.RichEmbed()
                 .setDescription(`${message.author.username}, Voici la liste des commandes:`)
                 .addField(`Divertissement`, "` \n x-8ball \n x-roll`", true)
-                .addField("Utilitaire", "` x-avatar \n x-profil \n x-serverinfo \n x-botinfo \n x-id \n x-ping \n x-invite`", true)
+                .addField("Utilitaire", "` x-avatar \n x-profil \n x-serverinfo \n x-botinfo \n x-id \n x-ping \n x-invite \n x-support`", true)
                 .addField(`Modération`, "` x-ban \n x-kick \n x-clear`", true)
                 .addField(`Administration`, "` x-sondage \n x-say`", true)
+                .addField(`Support`, "[[Clique ici pour accéder au support du Bot]](https://discordapp.com/invite/DRuyt7Q)", true)
                 .setFooter(`Xonaria`)
                 .setTimestamp()
                 .setColor("0xDF7401")
             message.channel.sendEmbed(embede)
         break;
+        case "support":
+            var embedef = new Discord.RichEmbed()
+                .setDescription(`Support`)
+                .addField(`Un problème avec le bot ? Ou vous voulez juste rejoindre le discord du créateur de celui-ci ?`, `[Clique ici pour rejoindre](https://discordapp.com/invite/DRuyt7Q)`, true)
+                .setFooter(`Xonaria`)
+                .setTimestamp()
+                .setColor("0xDF7401")
+            message.channel.sendEmbed(embedef)
+
         case "say":
             if(message.member.hasPermission("ADMINISTRATOR")) {
             message.delete();
