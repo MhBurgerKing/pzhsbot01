@@ -182,7 +182,7 @@ bot.on("message", function(message) {
             var embedbot = new Discord.RichEmbed()
                 .setDescription("Information")
                 .addField("Nombre de discord sur lequel je suis", `${bot.guilds.size} serveur(s)`)
-                .addField(`Nombre d'utilisateurs au total sur les ${bot.guilds.size} serveurs ou je suis`, `${bot.users.size} utilisateur(s)`)
+                .addField(`Nombre d'utilisateur(s) au total sur les ${bot.guilds.size} serveur(s) ou je suis`, `${bot.users.size} utilisateur(s)`)
                 .addField("Crée par", "[PZH#8058](https://www.youtube.com/c/pzhcodage)")
                 .addField("Crée le", "31/03/2018")
                 .addField("Version", "1.0.0")
