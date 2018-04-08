@@ -181,7 +181,8 @@ bot.on("message", function(message) {
         case "botinfo":
             var embedbot = new Discord.RichEmbed()
                 .setDescription("Information")
-                .addField("Nombre de discord sur lequel je suis", `${bot.guilds.size}`)
+                .addField("Nombre de discord sur lequel je suis", `${bot.guilds.size} serveur(s)`)
+                .addField(`Nombre d'utilisateur sur les ${bot.guilds.size} ou je suis`, `${bot.users.size} utilisateur(s)`)
                 .addField("Crée par", "[PZH#8058](https://www.youtube.com/c/pzhcodage)")
                 .addField("Crée le", "31/03/2018")
                 .addField("Version", "1.0.0")
