@@ -1,12 +1,28 @@
 const Discord = require('discord.js');
 var bot = new Discord.Client();
 var prefix = ("x-");
+const YTDL = require("ytdl-core");
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('database.json');
 const db = low(adapter);
 bot.login(process.env.TOKEN);
 db.defaults({ histoires: [], xp: []}).write()
+
+function play(connection, message) {
+    var server = servers[message.guild.id];
+
+    server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
+
+    server.queue.shift();
+
+    server.dispatcher.on("end", function() {
+        if (server.queue[0]) play(connection, message);
+        else connection.disconnect();
+    });
+}
+
+var servers = {};
 
 bot.on("ready", function() {
     bot.user.setActivity(`x-help | ${bot.guilds.size} serveurs | ${bot.users.size} utilisateurs`)
@@ -20,6 +36,42 @@ bot.on("message", function(message) {
     var args = message.content.substring(prefix.length).split(" ");
     
     switch (args[0].toLowerCase()) {
+        case "play":
+            if (!args[1]) {
+                message.channel.sendMessage("Merci d'envoyer le lien.");
+                return;
+            }
+
+            if (!message.member.voiceChannel) {
+                message.channel.sendMessage("Tu dois être dans un channel vocal.");
+                return;
+            }
+
+            if(!servers[message.guild.id]) servers[message.guild.id] = {
+                queue: []
+            };
+
+            var server = servers[message.guild.id];
+
+            server.queue.push(args[1]);
+
+            if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
+                play(connection, message);
+                message.channel.send("Lancement de votre musique. \n En cas de problème, vérifier si c'est un lien ( et non un teste ), si celle-ci n'a pas de copyright ou est correcte.")
+            });
+            break;
+        case "skip":
+            var server = servers[message.guild.id];
+
+            if (server.dispatcher) server.dispatcher.end();
+            message.channel.send("Musique skipé !\nEn cas de problème, vérifier si c'est un lien ( et non un teste ), si celle-ci n'a pas de copyright ou est correcte.")
+            break;
+        case "stop":
+            var server = servers[message.guild.id];
+
+            if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
+            message.channel.send("Musique arrêté.")
+            break;
         case "avatar":
         if (!message.mentions.users.first()) return message.channel.send("Merci de mentionner un utilisateur")
             let user = message.mentions.users.first() ? message.mentions.users.first() : message.author
@@ -35,6 +87,7 @@ bot.on("message", function(message) {
             var embede = new Discord.RichEmbed()
                 .setDescription(`${message.author.username}, Voici la liste des commandes:`)
                 .addField(`Divertissement`, "` \n x-8ball`", true)
+                .addField(`Musique`, "`x-play \n x-skip \n x-stop`", true)
                 .addField("Utilitaire", "` x-avatar \n x-profil \n x-serverinfo \n x-botinfo \n x-id \n x-ping \n x-invite \n x-support`", true)
                 .addField(`Modération`, "` x-ban \n x-kick \n x-clear`", true)
                 .addField(`Administration`, "` x-sondage \n x-say`", true)
