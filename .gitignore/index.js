@@ -240,7 +240,7 @@ bot.on("message", function(message) {
 
 }})})
 
-not.on("message", message => {
+bot.on("message", message => {
 
 if(message.author.bot)return;
     
