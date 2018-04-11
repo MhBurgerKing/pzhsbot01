@@ -243,8 +243,8 @@ bot.on("message", function(message) {
             message.channel.sendEmbed(embedbot)
         break;
                 
-
-}})})
+    }
+});
 bot.on("message", message => {
 
 var msgauthor = message.author.id;
