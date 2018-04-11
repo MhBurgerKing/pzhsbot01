@@ -37,7 +37,6 @@ bot.on("message", function(message) {
     
     switch (args[0].toLowerCase()) {
         case "play":
-            var args = message.content.substring(prefix.length).split(" ");
             if (!args[1]) {
                 message.channel.sendMessage("Merci d'envoyer le lien.");
                 return;
