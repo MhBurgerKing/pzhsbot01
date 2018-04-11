@@ -274,4 +274,4 @@ if (message.content === prefix + "profil") {
     .setColor("0xFF0040")
 message.channel.sendEmbed(statembed)
 
-}}})
+}}})})
