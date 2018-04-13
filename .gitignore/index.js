@@ -148,6 +148,7 @@ bot.on("message", function(message) {
            }else{
                return message.reply("Tu n'as pas la permission.")}
            break;
+            case "kick":
            let command = message.content.split(" ")[0];
            const args = message.content.slice(prefix.length).split(/ +/);
            command = args.shift().toLowerCase();
