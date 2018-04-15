@@ -275,7 +275,7 @@ bot.on("message", function(message) {
             }
         break;
 
-}})})
+}}})
 
 bot.on('message', message => {
 
