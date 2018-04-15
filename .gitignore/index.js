@@ -238,26 +238,38 @@ bot.on("message", function(message) {
                    .setColor("0x81DAF5")
                message.channel.sendEmbed(embedbot)
            break;
-           case "sondage-t":
+        case "sondage-t":
             let argson = message.content.split(" ").slice(1);
             let thingToEchon = argson.join(" ")
             if (!thingToEchon) return message.reply("Merci d'envoyer une question pour le sondage temporaire")
             if (!message.guild.channels.find("name", "sondage-t")) return message.reply("Erreur: le channel `sondage-t` est introuvable, il est nécéssaire de le créer pour effectuer cette commande.");
+            if (message.channel.name !== 'sondage-t') { return message.reply("Cette commande ne se fait pas ici, elle se fait dans `sondage-t`");
+            }else{
             var embedeeeon = new Discord.RichEmbed()
                 .setDescription("Sondage")
                 .addField(thingToEchon, "Répondre avec :white_check_mark: ou :x:")
                 .addField("Fin du sondage dans", "Moin de 5 minutes")
-                .setColor("0xFF00BF")
+                .setColor("0xB40404")
                 .setFooter(`Requête de ${message.author.username}`)
                 .setTimestamp()
             message.channel.sendEmbed(embedeeeon)
-            .then(function (message) {
-                message.react("✅")
-                message.react("❌")
-                setTimeout(() => message.delete(), 300000)
+        .then(function (message) {
+            message.react("✅")
+            message.react("❌")
+            setTimeout(() => message.delete(), 10000)
+            if (talkedRecently.has(message.author)) {
+                message.channel.send("Merci de patienter 5 minutes avant de pouvoir recommencer cette commande");
+                message.delete()
+        } else {
+            talkedRecently.add(message.author);
+            setTimeout(() => {
+                talkedRecently.delete(message.author);
+              }, 15000);
+        }
             }).catch(function() {
             });
-            break;
+            }
+        break;
 
 }})})
 
