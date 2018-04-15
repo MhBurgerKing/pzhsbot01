@@ -240,52 +240,54 @@ bot.on("message", function(message) {
                    .setColor("0x81DAF5")
                message.channel.sendEmbed(embedbot)
            break;
-        case "tempsondage":
+           case "tempsondage":
             message.delete()
-                if (cooldown.has(message.author.id)) return message.author.send(`**[ Command __tempsondage__ via le discord __${message.guild.name}__ ]** Veuillez attendre 12 heures avant de re-éffectuer cette commande.`);
-                
-                
-                        cooldown.add(message.author.id);
-                
-                        setTimeout(() => {
-                
-                          cooldown.delete(message.author.id);
-                
-                        }, 43200000);
-                    }
-            let argson = message.content.split(" ").slice(1);
-            let thingToEchon = argson.join(" ")
-            if (!thingToEchon) return message.reply("Merci d'envoyer une question pour le sondage temporaire de 5 minutes")
-            if (!message.guild.channels.find("name", "sondage-temp")) return message.reply("Erreur: le channel `sondage-temp` est introuvable, il est nécéssaire de le créer pour effectuer cette commande.");
-            if (message.channel.name !== 'sondage-temp') { return message.reply("Cette commande ne se fait pas ici, elle se fait dans `sondage-temp`");
-            }else{
-            var embedeeeon = new Discord.RichEmbed()
-                .setDescription("Sondage Temporaire")
-                .addField(thingToEchon, "Répondre avec :white_check_mark: ou :x:")
-                .addField("Fin du sondage dans", "Moin de 5 minutes")
-                .setColor("0xFF00FF")
-                .setFooter(`Requête de ${message.author.username}`)
-                .setTimestamp()
-            message.channel.sendEmbed(embedeeeon)
-            setTimeout(() => message.guild.channels.find("name", "sondage-temp").send(`Le sondage de ${message.author.username} vient d'expirer.`), 10000)
-        .then(function (message) {
-            message.react("✅")
-            message.react("❌")
-            setTimeout(() => message.delete(), 300000)
-            if (talkedRecently.has(message.author)) {
-                message.delete()
-        } else {
-            talkedRecently.add(message.author);
-            setTimeout(() => {
-                talkedRecently.delete(message.author);
-              }, 43200000);
+            if (cooldown.has(message.author.id)) return message.author.send(`**[ Command __tempsondage__ via le discord __${message.guild.name}__ ]** Veuillez attendre 12 heures avant de re-éffectuer cette commande.`);
+            
+            
+                    cooldown.add(message.author.id);
+            
+                    setTimeout(() => {
+            
+                      cooldown.delete(message.author.id);
+            
+                    }, 10000);
+                let argson = message.content.split(" ").slice(1);
+                let thingToEchon = argson.join(" ")
+                if (!thingToEchon) return message.reply("Merci d'envoyer une question pour le sondage temporaire de 5 minutes")
+                if (!message.guild.channels.find("name", "sondage-temp")) return message.reply("Erreur: le channel `sondage-temp` est introuvable, il est nécéssaire de le créer pour effectuer cette commande.");
+                if (message.channel.name !== 'sondage-temp') { return message.reply("Cette commande ne se fait pas ici, elle se fait dans `sondage-temp`");
+                }else{
+                setTimeout(() => message.guild.channels.find("name", "sondage-temp").send(`Le sondage de ${message.author.username} vient d'expirer.`), 10000)
+                var embedeeeon = new Discord.RichEmbed()
+                    .setDescription("Sondage Temporaire")
+                    .addField(thingToEchon, "Répondre avec :white_check_mark: ou :x:")
+                    .addField("Fin du sondage dans", "Moin de 5 minutes")
+                    .setColor("0xFF00FF")
+                    .setFooter(`Requête de ${message.author.username}`)
+                    .setTimestamp()
+                message.channel.sendEmbed(embedeeeon)
+                .then(function (message) {
+                message.react("✅")
+                message.react("❌")
+                setTimeout(() => message.delete(), 10000)
+                if (talkedRecently.has(message.author)) {
+                    message.delete()
+                } else {
+                talkedRecently.add(message.author);
+                setTimeout(() => {
+                    talkedRecently.delete(message.author);
+                }, 10000);
+                }
+                }).catch(function() {
+                });
+
+            break;
+
         }
-            }).catch(function() {
-            });
-            }
 
 
-});
+};
 
 bot.on('message', message => {
 
