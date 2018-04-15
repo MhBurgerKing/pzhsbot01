@@ -243,8 +243,6 @@ bot.on("message", function(message) {
             message.delete();
             talkedRecently.add(message.author);
             setTimeout(() => message.guild.channels.find("name", "sondage-temp").send(`Le sondage de ${message.author.username} vient d'expirer.`), 300000)
-            if (talkedRecently.has(message.author)) {
-                message.author.send(`**[Commande tempsondage via le discord ${message.guild.name} ]**: Merci de patienter 12 heures avant de pouvoir recommencer cette commande`);
             let argson = message.content.split(" ").slice(1);
             let thingToEchon = argson.join(" ")
             if (!thingToEchon) return message.reply("Merci d'envoyer une question pour le sondage temporaire de 5 minutes")
@@ -264,6 +262,7 @@ bot.on("message", function(message) {
             message.react("❌")
             setTimeout(() => message.delete(), 300000)
             if (talkedRecently.has(message.author)) {
+                message.author.send(`**[Commande tempsondage via le discord ${message.guild.name} ]**: Merci de patienter 12 heures avant de pouvoir recommencer cette commande`);
                 message.delete()
         } else {
             talkedRecently.add(message.author);
