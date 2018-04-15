@@ -240,9 +240,18 @@ bot.on("message", function(message) {
                message.channel.sendEmbed(embedbot)
            break;
         case "tempsondage":
-            message.delete();
-            talkedRecently.add(message.author);
-            setTimeout(() => message.guild.channels.find("name", "sondage-temp").send(`Le sondage de ${message.author.username} vient d'expirer.`), 300000)
+            message.delete()
+                if (cooldown.has(message.author.id)) return message.author.send(`**[ Command __tempsondage__ via le discord __${message.guild.name}__ ]** Veuillez attendre 12 heures avant de re-éffectuer cette commande.`);
+                
+                
+                        cooldown.add(message.author.id);
+                
+                        setTimeout(() => {
+                
+                          cooldown.delete(message.author.id);
+                
+                        }, 10000);
+                    }
             let argson = message.content.split(" ").slice(1);
             let thingToEchon = argson.join(" ")
             if (!thingToEchon) return message.reply("Merci d'envoyer une question pour le sondage temporaire de 5 minutes")
@@ -257,25 +266,25 @@ bot.on("message", function(message) {
                 .setFooter(`Requête de ${message.author.username}`)
                 .setTimestamp()
             message.channel.sendEmbed(embedeeeon)
+            setTimeout(() => message.guild.channels.find("name", "sondage-temp").send(`Le sondage de ${message.author.username} vient d'expirer.`), 10000)
         .then(function (message) {
             message.react("✅")
             message.react("❌")
-            setTimeout(() => message.delete(), 300000)
+            setTimeout(() => message.delete(), 10000)
             if (talkedRecently.has(message.author)) {
-                message.author.send(`**[Commande tempsondage via le discord ${message.guild.name} ]**: Merci de patienter 12 heures avant de pouvoir recommencer cette commande`);
                 message.delete()
         } else {
             talkedRecently.add(message.author);
             setTimeout(() => {
                 talkedRecently.delete(message.author);
-              }, 43200000);
+              }, 10000);
         }
             }).catch(function() {
             });
             }
-        break;
 
-}})})
+
+});
 
 bot.on('message', message => {
 
