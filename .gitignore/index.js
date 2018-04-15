@@ -275,7 +275,7 @@ bot.on("message", function(message) {
             }
         break;
 
-}}})
+}})})
 
 bot.on('message', message => {
 
@@ -305,4 +305,4 @@ var statembed = new Discord.RichEmbed()
 .addField("Nombre de message envoyé", `${xpfinal[1]}`, true)
 .setColor("0xFF0040")
 message.channel.sendEmbed(statembed)
-}}})})
+}}})
