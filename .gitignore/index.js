@@ -7,6 +7,7 @@ const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('database.json');
 const db = low(adapter);
 const talkedRecently = new Set();
+const cooldown = new Set();
 bot.login(process.env.TOKEN);
 db.defaults({ histoires: [], xp: []}).write()
 
