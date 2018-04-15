@@ -242,6 +242,7 @@ bot.on("message", function(message) {
             let argson = message.content.split(" ").slice(1);
             let thingToEchon = argson.join(" ")
             if (!thingToEchon) return message.reply("Merci d'envoyer une question pour le sondage temporaire")
+            if (!message.guild.channels.find("name", "sondage-t")) return message.reply("Erreur: le channel `sondage-t` est introuvable, il est nécéssaire de le créer pour effectuer cette commande.");
             var embedeeeon = new Discord.RichEmbed()
                 .setDescription("Sondage")
                 .addField(thingToEchon, "Répondre avec :white_check_mark: ou :x:")
@@ -256,7 +257,7 @@ bot.on("message", function(message) {
                 setTimeout(() => message.delete(), 300000)
             }).catch(function() {
             });
-        break;
+            break;
 
 }})})
 
