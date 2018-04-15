@@ -246,7 +246,7 @@ bot.on("message", function(message) {
                 .setDescription("Sondage")
                 .addField(thingToEchon, "Répondre avec :white_check_mark: ou :x:")
                 .addField("Fin du sondage dans", "Moin de 5 minutes")
-                .setColor("0xB40404")
+                .setColor("0xFF00BF")
                 .setFooter(`Requête de ${message.author.username}`)
                 .setTimestamp()
             message.channel.sendEmbed(embedeeeon)
