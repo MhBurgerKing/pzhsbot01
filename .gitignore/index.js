@@ -239,15 +239,15 @@ bot.on("message", function(message) {
                    .setColor("0x81DAF5")
                message.channel.sendEmbed(embedbot)
            break;
-        case "sondage-t":
+        case "tempsondage":
             let argson = message.content.split(" ").slice(1);
             let thingToEchon = argson.join(" ")
-            if (!thingToEchon) return message.reply("Merci d'envoyer une question pour le sondage temporaire")
-            if (!message.guild.channels.find("name", "sondage-t")) return message.reply("Erreur: le channel `sondage-t` est introuvable, il est nécéssaire de le créer pour effectuer cette commande.");
-            if (message.channel.name !== 'sondage-t') { return message.reply("Cette commande ne se fait pas ici, elle se fait dans `sondage-t`");
+            if (!thingToEchon) return message.reply("Merci d'envoyer une question pour le sondage temporaire de 5 minutes")
+            if (!message.guild.channels.find("name", "sondage-temp")) return message.reply("Erreur: le channel `sondage-temp` est introuvable, il est nécéssaire de le créer pour effectuer cette commande.");
+            if (message.channel.name !== 'sondage-temp') { return message.reply("Cette commande ne se fait pas ici, elle se fait dans `sondage-temp`");
             }else{
             var embedeeeon = new Discord.RichEmbed()
-                .setDescription("Sondage")
+                .setDescription("Sondage Temporaire")
                 .addField(thingToEchon, "Répondre avec :white_check_mark: ou :x:")
                 .addField("Fin du sondage dans", "Moin de 5 minutes")
                 .setColor("0xFF00FF")
