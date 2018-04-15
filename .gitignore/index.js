@@ -251,7 +251,7 @@ bot.on("message", function(message) {
             
                       cooldown.delete(message.author.id);
             
-                    }, 10000);
+                    }, 43200000);
                 let argson = message.content.split(" ").slice(1);
                 let thingToEchon = argson.join(" ")
                 if (!thingToEchon) return message.reply("Merci d'envoyer une question pour le sondage temporaire de 5 minutes")
@@ -270,14 +270,14 @@ bot.on("message", function(message) {
                 .then(function (message) {
                 message.react("✅")
                 message.react("❌")
-                setTimeout(() => message.delete(), 10000)
+                setTimeout(() => message.delete(), 300000)
                 if (talkedRecently.has(message.author)) {
                     message.delete()
                 } else {
                 talkedRecently.add(message.author);
                 setTimeout(() => {
                     talkedRecently.delete(message.author);
-                }, 10000);
+                }, 43200000);
                 }
                 }).catch(function() {
                 });
@@ -317,4 +317,4 @@ var statembed = new Discord.RichEmbed()
 .addField("Nombre de message envoyé", `${xpfinal[1]}`, true)
 .setColor("0xFF0040")
 message.channel.sendEmbed(statembed)
-}}})})
+}}})})})
