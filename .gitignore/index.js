@@ -274,13 +274,6 @@ bot.on("message", function(message) {
 
 }})})
 
-bot.on("message", message => {
-    
-    if (message.channel.name == 'sondage-temp') { 
-        if(message.author) return message.delete()
-        if(!message.author) return message.reply("easter egg")
-    }
-
 var msgauthor = message.author.id;
 
 if(message.author.bot)return;
