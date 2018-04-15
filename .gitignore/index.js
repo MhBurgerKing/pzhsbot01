@@ -6,6 +6,7 @@ const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('database.json');
 const db = low(adapter);
+const talkedRecently = new Set();
 bot.login(process.env.TOKEN);
 db.defaults({ histoires: [], xp: []}).write()
 
@@ -264,7 +265,7 @@ bot.on("message", function(message) {
             talkedRecently.add(message.author);
             setTimeout(() => {
                 talkedRecently.delete(message.author);
-              }, 300000);
+              }, 43200000);
         }
             }).catch(function() {
             });
