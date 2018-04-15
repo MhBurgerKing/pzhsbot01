@@ -251,7 +251,7 @@ bot.on("message", function(message) {
             
                       cooldown.delete(message.author.id);
             
-                    }, 43200000);
+                    }, 10000);
                 let argson = message.content.split(" ").slice(1);
                 let thingToEchon = argson.join(" ")
                 if (!thingToEchon) return message.reply("Merci d'envoyer une question pour le sondage temporaire de 5 minutes")
@@ -270,14 +270,14 @@ bot.on("message", function(message) {
                 .then(function (message) {
                 message.react("✅")
                 message.react("❌")
-                setTimeout(() => message.delete(), 300000)
+                setTimeout(() => message.delete(), 10000)
                 if (talkedRecently.has(message.author)) {
                     message.delete()
                 } else {
                 talkedRecently.add(message.author);
                 setTimeout(() => {
                     talkedRecently.delete(message.author);
-                }, 43200000);
+                }, 10000);
                 }
                 }).catch(function() {
                 });
