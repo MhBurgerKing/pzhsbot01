@@ -87,7 +87,7 @@ bot.on("message", function(message) {
             case "help":
                 var embede = new Discord.RichEmbed()
                     .setDescription(`${message.author.username}, Voici la liste des commandes:`)
-                    .addField(`Divertissement`, "` \n x-8ball`", true)
+                    .addField(`Divertissement`, "` \n x-8ball \n x-sondage-t`", true)
                     .addField(`Musique`, "`x-play \n x-skip \n x-stop`", true)
                     .addField("Utilitaire", "` x-avatar \n x-profil \n x-serverinfo \n x-botinfo \n x-id \n x-ping \n x-invite \n x-support`", true)
                     .addField(`Modération`, "` x-ban \n x-kick \n x-clear`", true)
@@ -238,6 +238,25 @@ bot.on("message", function(message) {
                    .setColor("0x81DAF5")
                message.channel.sendEmbed(embedbot)
            break;
+           case "sondage-t":
+            let argson = message.content.split(" ").slice(1);
+            let thingToEchon = argson.join(" ")
+            if (!thingToEchon) return message.reply("Merci d'envoyer une question pour le sondage temporaire")
+            var embedeeeon = new Discord.RichEmbed()
+                .setDescription("Sondage")
+                .addField(thingToEchon, "Répondre avec :white_check_mark: ou :x:")
+                .addField("Fin du sondage dans", "Moin de 5 minutes")
+                .setColor("0xB40404")
+                .setFooter(`Requête de ${message.author.username}`)
+                .setTimestamp()
+            message.channel.sendEmbed(embedeeeon)
+            .then(function (message) {
+                message.react("✅")
+                message.react("❌")
+                setTimeout(() => message.delete(), 300000)
+            }).catch(function() {
+            });
+        break;
 
 }})})
 
