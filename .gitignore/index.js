@@ -274,6 +274,8 @@ bot.on("message", function(message) {
 
 }})})
 
+bot.on('message', message => {
+
 var msgauthor = message.author.id;
 
 if(message.author.bot)return;
