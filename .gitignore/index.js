@@ -249,22 +249,22 @@ bot.on("message", function(message) {
                 .setDescription("Sondage")
                 .addField(thingToEchon, "Répondre avec :white_check_mark: ou :x:")
                 .addField("Fin du sondage dans", "Moin de 5 minutes")
-                .setColor("0xB40404")
+                .setColor("0xFF00FF")
                 .setFooter(`Requête de ${message.author.username}`)
                 .setTimestamp()
             message.channel.sendEmbed(embedeeeon)
         .then(function (message) {
             message.react("✅")
             message.react("❌")
-            setTimeout(() => message.delete(), 10000)
+            setTimeout(() => message.delete(), 300000)
             if (talkedRecently.has(message.author)) {
-                message.channel.send("Merci de patienter 5 minutes avant de pouvoir recommencer cette commande");
+                message.channel.send("Merci de patienter 12 heures avant de pouvoir recommencer cette commande");
                 message.delete()
         } else {
             talkedRecently.add(message.author);
             setTimeout(() => {
                 talkedRecently.delete(message.author);
-              }, 15000);
+              }, 43200000);
         }
             }).catch(function() {
             });
