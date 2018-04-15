@@ -264,7 +264,7 @@ bot.on("message", function(message) {
             talkedRecently.add(message.author);
             setTimeout(() => {
                 talkedRecently.delete(message.author);
-              }, 43200000);
+              }, 300000);
         }
             }).catch(function() {
             });
