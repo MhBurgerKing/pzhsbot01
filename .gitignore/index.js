@@ -258,7 +258,7 @@ bot.on("message", function(message) {
                       cooldown.delete(message.author.id);
             
                     }, 43200000);
-                setTimeout(() => message.guild.channels.find("name", "sondage-temp").send(`Le sondage de ${message.author.username} vient d'expirer.`), 10000)
+                setTimeout(() => message.guild.channels.find("name", "sondage-temp").send(`Le sondage de ${message.author.username} vient d'expirer.`), 300000)
                 var embedeeeon = new Discord.RichEmbed()
                     .setDescription("Sondage Temporaire")
                     .addField(thingToEchon, "Répondre avec :white_check_mark: ou :x:")
