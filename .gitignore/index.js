@@ -272,7 +272,6 @@ bot.on("message", function(message) {
                 .then(function (message) {
                 message.react("✅")
                 message.react("❌")
-                }
                 }).catch(function() {
                 });
             break;
