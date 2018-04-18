@@ -257,8 +257,9 @@ bot.on("message", function(message) {
 
                 cooldown.delete(message.author.id);
 
-                }, 43200000); 
+                }, 43200000);
 
+               if (!cooldown.has(message.author.id))
                 setTimeout(() => message.guild.channels.find("name", "sondage-temp").send(`Le sondage de ${message.author.username} vient d'expirer.`), 300000)
                 var embedeeeon = new Discord.RichEmbed()
                     .setDescription("Sondage Temporaire")
@@ -271,16 +272,6 @@ bot.on("message", function(message) {
                 .then(function (message) {
                 message.react("✅")
                 message.react("❌")
-                cooldown.add(message.author.id);
-
-                setTimeout(() => {
-
-                cooldown.delete(message.author.id);
-
-                }, 43200000); 
-                }).catch(function() {
-                });
-
             break;
 
         }
