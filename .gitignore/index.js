@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 var bot = new Discord.Client();
 var prefix = ("x-");
 const YTDL = require("ytdl-core");
+const { get } = require("snekfetch"); 
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('database.json');
