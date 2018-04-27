@@ -241,9 +241,9 @@ bot.on("message", function(message) {
                message.channel.sendEmbed(embedbot)
            break;
            case "global-tchat":
-           let argson = message.content.split(" ").slice(1);
-           let xo03 = argson.join(" ")
-           var xo01 = client.channels.findAll('name', 'xonaria-global');
+           let xoargs = message.content.split(" ").slice(1);
+           let xo03 = xoargs.join(" ")
+           var xo01 = bot.channels.findAll('name', 'xonaria-global');
            var xo02 = message.guild.channels.find('name', 'xonaria-global');
            if(!xo02) return message.reply("Channel `xonaria-global` introuvable, merci de le créer pour effectuer cette commande.")
            if(!xo03) return message.reply("Merci d'écrire un message à envoyer à la globalité des discords.")
@@ -257,7 +257,7 @@ bot.on("message", function(message) {
            .addField("Message", xo03)
            .setFooter("Xonaria Corporation")
            .setTimestamp()
-       channel.send(embed)})
+       bot.send(embed)})
           break;
             case "tempsondage":
                 let argson = message.content.split(" ").slice(1);
