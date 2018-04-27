@@ -249,7 +249,7 @@ bot.on("message", function(message) {
            if (message.channel.name !== 'xonaria-global') return message.reply("Commande à effectuer dans le channel `xonaria-global`")
            if(!xo03) return message.reply("Merci d'écrire un message à envoyer à la globalité des discords.")    
              
-           var embed = new Discord.RichEmbed()
+           var embedxo = new Discord.RichEmbed()
            .setColor("0x8BCC14")
            .setTitle("Message Global Xonaria")
            .addField("Pseudo de l'utilisateur", message.author.username + "#" + message.author.discriminator, true)
@@ -257,7 +257,7 @@ bot.on("message", function(message) {
            .addField("Message", xo03)
            .setFooter("Xonaria Corporation")
            .setTimestamp()
-       bot.channels.findAll('name', 'xonaria-global').map(channel => channel.send(embed))
+       bot.channels.findAll('name', 'xonaria-global').map(channel => channel.send(embedxo))
             
           break;
             case "tempsondage":
