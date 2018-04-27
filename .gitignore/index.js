@@ -295,6 +295,7 @@ bot.on("message", function(message) {
         channel.send(embed)
             })
         }
+           break;
                     
 
         }
