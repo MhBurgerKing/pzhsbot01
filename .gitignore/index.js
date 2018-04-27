@@ -257,7 +257,8 @@ bot.on("message", function(message) {
            .addField("Message", xo03)
            .setFooter("Xonaria Corporation")
            .setTimestamp()
-       bot.sendEmbed(embed)})
+       bot.send(embed)
+            })
           break;
             case "tempsondage":
                 let argson = message.content.split(" ").slice(1);
