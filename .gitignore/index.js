@@ -89,11 +89,11 @@ bot.on("message", function(message) {
             case "help":
                 var embede = new Discord.RichEmbed()
                     .setDescription(`${message.author.username}, Voici la liste des commandes:`)
-                    .addField(`Divertissement`, "` \n x-8ball \n x-sondage-t`", true)
-                    .addField(`Musique`, "`x-play \n x-skip \n x-stop`", true)
-                    .addField("Utilitaire", "` x-avatar \n x-profil \n x-serverinfo \n x-botinfo \n x-id \n x-ping \n x-invite \n x-support`", true)
-                    .addField(`Modération`, "` x-ban \n x-kick \n x-clear`", true)
-                    .addField(`Administration`, "` x-sondage \n x-say`", true)
+                    .addField(`Divertissement`, "` \nx-8ball \nx-sondage-t : :warning: cette commande rencontre actuellement des problèmes \nx-global-tchat`", true)
+                    .addField(`Musique`, "`x-play \nx-skip \nx-stop`", true)
+                    .addField("Utilitaire", "` x-avatar \nx-profil \nx-serverinfo \nx-botinfo \nx-id \nx-ping \nx-invite \nx-support`", true)
+                    .addField(`Modération`, "` x-ban \nx-kick \nx-clear`", true)
+                    .addField(`Administration`, "` x-sondage \nx-say`", true)
                     .addField(`Support`, "[[Clique ici pour accéder au support du Bot]](https://discordapp.com/invite/DRuyt7Q)", true)
                     .setFooter(`Xonaria`)
                     .setTimestamp()
@@ -240,6 +240,25 @@ bot.on("message", function(message) {
                    .setColor("0x81DAF5")
                message.channel.sendEmbed(embedbot)
            break;
+           case "global-tchat":
+           let argson = message.content.split(" ").slice(1);
+           let xo03 = argson.join(" ")
+           var xo01 = client.channels.findAll('name', 'xonaria-global');
+           var xo02 = message.guild.channels.find('name', 'xonaria-global');
+           if(!xo02) return message.reply("Channel `xonaria-global` introuvable, merci de le créer pour effectuer cette commande.")
+           if(!xo03) return message.reply("Merci d'écrire un message à envoyer à la globalité des discords.")
+           xo01.forEach(channel => {
+            
+           var embed = new Discord.RichEmbed()
+           .setColor("0xBCF002")
+           .setTitle("Message Global Xonaria")
+           .addField("Pseudo de l'utilisateur", message.author + "#" + message.author.discriminator, true)
+           .addField("Discord", message.guild.name, true)
+           .addField("Message", xo03)
+           .setFooter("Xonaria Corporation")
+           .setTimestamp()
+       channel.send(embed)})
+          break;
             case "tempsondage":
                 let argson = message.content.split(" ").slice(1);
                 let thingToEchon = argson.join(" ")
@@ -275,27 +294,6 @@ bot.on("message", function(message) {
                 }).catch(function() {
                 });
             break;
-            case "global-tchat":
-            let argson = message.content.split(" ").slice(1);
-            let xo03 = argson.join(" ")
-            var xo01 = client.channels.findAll('name', 'xonaria-global');
-            var xo02 = message.guild.channels.find('name', 'xonaria-global');
-            if(!xo02) return message.reply("Channel `xonaria-global` introuvable, merci de le créer pour effectuer cette commande.")
-            if(!xo03) return message.reply("Merci d'écrire un message à envoyer à la globalité des discords.")
-            xo01.forEach(channel => {
-             
-            var embed = new Discord.RichEmbed()
-            .setColor("0xBCF002")
-            .setTitle("Message Global Xonaria")
-            .addField("Pseudo de l'utilisateur", message.author + "#" + message.author.discriminator, true)
-            .addField("Discord", message.guild.name, true)
-            .addField("Message", xo03)
-            .setFooter("Xonaria Corporation")
-            .setTimestamp()
-        channel.send(embed)
-            })
-        }
-           break;
                     
 
         }
