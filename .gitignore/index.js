@@ -246,11 +246,11 @@ bot.on("message", function(message) {
            var xo01 = bot.channels.findAll('name', 'xonaria-global');
            var xo02 = message.guild.channels.find('name', 'xonaria-global');
            if(!xo02) return message.reply("Channel `xonaria-global` introuvable, merci de le créer pour effectuer cette commande.")
-           if(!xo03) return message.reply("Merci d'écrire un message à envoyer à la globalité des discords.")
-           xo01.forEach(channel => {
-            
+           if (message.channel.name !== 'xonaria-global') return message.reply("Commande à effectuer dans le channel `xonaria-global`")
+           if(!xo03) return message.reply("Merci d'écrire un message à envoyer à la globalité des discords.")    
+             
            var embed = new Discord.RichEmbed()
-           .setColor("0xBCF002")
+           .setColor("0x8BCC14")
            .setTitle("Message Global Xonaria")
            .addField("Pseudo de l'utilisateur", message.author + "#" + message.author.discriminator, true)
            .addField("Discord", message.guild.name, true)
