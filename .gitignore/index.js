@@ -252,13 +252,13 @@ bot.on("message", function(message) {
            var embed = new Discord.RichEmbed()
            .setColor("0x8BCC14")
            .setTitle("Message Global Xonaria")
-           .addField("Pseudo de l'utilisateur", message.author + "#" + message.author.discriminator, true)
+           .addField("Pseudo de l'utilisateur", message.author.username + "#" + message.author.discriminator, true)
            .addField("Discord", message.guild.name, true)
            .addField("Message", xo03)
            .setFooter("Xonaria Corporation")
            .setTimestamp()
        bot.channels.findAll('name', 'xonaria-global').map(channel => channel.send(embed))
-            })
+            
           break;
             case "tempsondage":
                 let argson = message.content.split(" ").slice(1);
