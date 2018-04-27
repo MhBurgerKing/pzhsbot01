@@ -89,7 +89,7 @@ bot.on("message", function(message) {
             case "help":
                 var embede = new Discord.RichEmbed()
                     .setDescription(`${message.author.username}, Voici la liste des commandes:`)
-                    .addField(`Divertissement`, "` \nx-8ball \nx-sondage-t : :warning: cette commande rencontre actuellement des problèmes \nx-global-tchat`", true)
+                    .addField(`Divertissement`, "` \nx-8ball \nx-sondage-t : :warning: cette commande rencontre actuellement des problèmes \nx-globaltchat`", true)
                     .addField(`Musique`, "`x-play \nx-skip \nx-stop`", true)
                     .addField("Utilitaire", "` x-avatar \nx-profil \nx-serverinfo \nx-botinfo \nx-id \nx-ping \nx-invite \nx-support`", true)
                     .addField(`Modération`, "` x-ban \nx-kick \nx-clear`", true)
@@ -240,7 +240,7 @@ bot.on("message", function(message) {
                    .setColor("0x81DAF5")
                message.channel.sendEmbed(embedbot)
            break;
-           case "global-tchat":
+           case "globaltchat":
            let xoargs = message.content.split(" ").slice(1);
            let xo03 = xoargs.join(" ")
            var xo01 = bot.channels.findAll('name', 'xonaria-global');
@@ -257,7 +257,7 @@ bot.on("message", function(message) {
            .addField("Message", xo03)
            .setFooter("Xonaria Corporation")
            .setTimestamp()
-       message.channel.sendEmbed(embed)
+       bot.channels.findAll('name', 'xonaria-global').map(channel => channel.send(embed))
             })
           break;
             case "tempsondage":
