@@ -89,7 +89,7 @@ bot.on("message", function(message) {
             case "help":
                 var embede = new Discord.RichEmbed()
                     .setDescription(`${message.author.username}, Voici la liste des commandes:`)
-                    .addField(`Divertissement`, "` \nx-8ball \nx-sondage-t : :warning: cette commande rencontre actuellement des problèmes \nx-globaltchat`", true)
+                    .addField(`Divertissement`, "` \nx-8ball \nx-sondage-t \nx-globaltchat`", true)
                     .addField(`Musique`, "`x-play \nx-skip \nx-stop`", true)
                     .addField("Utilitaire", "` x-avatar \nx-profil \nx-serverinfo \nx-botinfo \nx-id \nx-ping \nx-invite \nx-support`", true)
                     .addField(`Modération`, "` x-ban \nx-kick \nx-clear`", true)
@@ -294,6 +294,9 @@ bot.on("message", function(message) {
                 message.react("❌")
                 }).catch(function() {
                 });
+            break;
+            case "sondage-t":
+                message.channel.sendMessage("> :warning: Cette commande recontre actuellement des problèmes techniques. :warning: <")
             break;
                     
 
