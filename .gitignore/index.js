@@ -275,6 +275,27 @@ bot.on("message", function(message) {
                 }).catch(function() {
                 });
             break;
+            case "global-tchat":
+            let argson = message.content.split(" ").slice(1);
+            let xo03 = argson.join(" ")
+            var xo01 = client.channels.findAll('name', 'xonaria-global');
+            var xo02 = message.guild.channels.find('name', 'xonaria-global');
+            if(!xo02) return message.reply("Channel `xonaria-global` introuvable, merci de le créer pour effectuer cette commande.")
+            if(!xo03) return message.reply("Merci d'écrire un message à envoyer à la globalité des discords.")
+            xo01.forEach(channel => {
+             
+            var embed = new Discord.RichEmbed()
+            .setColor("0xBCF002")
+            .setTitle("Message Global Xonaria")
+            .addField("Pseudo de l'utilisateur", message.author + "#" + message.author.discriminator, true)
+            .addField("Discord", message.guild.name, true)
+            .addField("Message", xo03)
+            .setFooter("Xonaria Corporation")
+            .setTimestamp()
+        channel.send(embed)
+            })
+        }
+                    
 
         }
 
