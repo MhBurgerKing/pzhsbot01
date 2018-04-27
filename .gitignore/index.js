@@ -258,7 +258,9 @@ bot.on("message", function(message) {
            .setFooter("Xonaria Corporation")
            .setTimestamp()
        bot.channels.findAll('name', 'xonaria-global').map(channel => channel.send(embedxo))
-            
+            case "sondage-t":
+                message.channel.sendMessage("> :warning: Cette commande recontre actuellement des problèmes techniques. :warning: <")
+            break;
           break;
             case "tempsondage":
                 let argson = message.content.split(" ").slice(1);
@@ -294,9 +296,6 @@ bot.on("message", function(message) {
                 message.react("❌")
                 }).catch(function() {
                 });
-            break;
-            case "sondage-t":
-                message.channel.sendMessage("> :warning: Cette commande recontre actuellement des problèmes techniques. :warning: <")
             break;
                     
 
