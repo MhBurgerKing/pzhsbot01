@@ -88,9 +88,24 @@ bot.on("message", function(message) {
             message.channel.send("", {embed})
             break;
             case "help":
+                        var replysh = [
+                            '#F407FC', 
+                            '#034EEF',
+                            '#09F4D1',
+                            '#09F14E',
+                            '#E7EF07',
+                            '#F5A718',
+                            '#FB4B06',
+                            '#FB2702',
+                            '#F6F4F3',
+                            '#201F1F'
+                        ];
+                    
+                        let reponseh = (replysh[Math.floor(Math.random() * replysh.length)])
                 var embede = new Discord.RichEmbed()
                     .setDescription(`${message.author.username}, Voici la liste des commandes:`)
                     .addField(`Divertissement`, "` \nx-8ball \nx-sondage-t \nx-globaltchat`", true)
+                    .addField(`Image`, "`x-chat`", true)
                     .addField(`Musique`, "`x-play \nx-skip \nx-stop`", true)
                     .addField("Utilitaire", "` x-avatar \nx-profil \nx-serverinfo \nx-botinfo \nx-id \nx-ping \nx-invite \nx-support`", true)
                     .addField(`Modération`, "` x-ban \nx-kick \nx-clear`", true)
@@ -98,7 +113,7 @@ bot.on("message", function(message) {
                     .addField(`Support`, "[[Clique ici pour accéder au support du Bot]](https://discordapp.com/invite/DRuyt7Q)", true)
                     .setFooter(`Xonaria`)
                     .setTimestamp()
-                    .setColor("0xDF7401")
+                    .setColor(reponseh)
                 message.channel.sendEmbed(embede)
             break;
             case "support":
