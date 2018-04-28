@@ -229,7 +229,8 @@ bot.on("message", function(message) {
                "Non.",
                "Je ne sais pas.",
                "Peut-être.",
-               "Probablement."
+               "Probablement.",
+                "666"
                ];
            
                let reponse = (replys[Math.floor(Math.random() * replys.length)])
