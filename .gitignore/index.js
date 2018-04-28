@@ -279,9 +279,24 @@ bot.on("message", function(message) {
            if(!xo02) return message.reply("Channel `xonaria-global` introuvable, merci de le créer pour effectuer cette commande.")
            if (message.channel.name !== 'xonaria-global') return message.reply("Commande à effectuer dans le channel `xonaria-global`")
            if(!xo03) return message.reply("Merci d'écrire un message à envoyer à la globalité des discords.")    
+
+                        var replysg = [
+                            '#F407FC', 
+                            '#034EEF',
+                            '#09F4D1',
+                            '#09F14E',
+                            '#E7EF07',
+                            '#F5A718',
+                            '#FB4B06',
+                            '#FB2702',
+                            '#F6F4F3',
+                            '#201F1F'
+                        ];
+                    
+                        let reponseg = (replysg[Math.floor(Math.random() * replysg.length)])
              
            var embedxo = new Discord.RichEmbed()
-           .setColor("0x8BCC14")
+           .setColor(reponseg)
            .setTitle("Message Global Xonaria")
            .addField("Pseudo de l'utilisateur", message.author.username + "#" + message.author.discriminator, true)
            .addField("Discord", message.guild.name, true)
