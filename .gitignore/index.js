@@ -263,7 +263,33 @@ bot.on("message", function(message) {
             case "sondage-t":
                 message.channel.sendMessage("> :warning: Cette commande recontre actuellement des problèmes techniques. :warning: <")
             break;
-          break;
+            case "chat":
+                   try {
+                    get('https://aws.random.cat/meow').then(res => {
+                        var replys = [
+                            '#F407FC', 
+                            '#034EEF',
+                            '#09F4D1',
+                            '#09F14E',
+                            '#E7EF07',
+                            '#F5A718',
+                            '#FB4B06',
+                            '#FB2702',
+                            '#F6F4F3',
+                            '#201F1F'
+                        ];
+                    
+                        let reponse = (replys[Math.floor(Math.random() * replys.length)])
+                        const embed = new Discord.RichEmbed()
+                        .setDescription(`:cat: Voilà une image aléatoire de chat pour toi, ${message.author.username} !`)
+                        .setImage(res.body.file)
+                        .setColor(reponse)
+                        return message.channel.send({embed});
+                    });
+                } catch(err) {
+                    return message.channel.send(error.stack);
+                }
+            break;
             case "tempsondage":
                 let argson = message.content.split(" ").slice(1);
                 let thingToEchon = argson.join(" ")
@@ -306,33 +332,5 @@ bot.on("message", function(message) {
 
 };
 
-bot.on('message', message => {
 
-var msgauthor = message.author.id;
-
-if(message.author.bot)return;
-    
-if(!db.get("xp").find({user: msgauthor}).value()){
-    db.get("xp").push({user: msgauthor, xp: 1}).write();
-}else{
-    var userxpdb = db.get("xp").filter({user: msgauthor}).find('xp').value();
-    console.log(userxpdb);
-    var userxp = Object.values(userxpdb)
-    console.log(userxp)
-    console.log(`Nombre d'xp : ${userxp[1]}`)
-
-    db.get("xp").find({user: msgauthor}).assign({user: msgauthor, xp: userxp[1] += 1}).write();
-
-if (message.content === prefix + "profil") {
-var xp = db.get("xp").filter({user: msgauthor}).find('xp').value()
-var xpfinal = Object.values(xp);
-var statembed = new Discord.RichEmbed()
-.setDescription("Profil")
-.addField("Ton pseudo", `${message.author.tag}`, true)
-.addField("Ton identifiant", `${message.author.id}`, true)
-.addField("Tu as rejoin le", `${message.member.joinedAt}`, true)
-.addField("Nombre de message envoyé", `${xpfinal[1]}`, true)
-.setColor("0xFF0040")
-message.channel.sendEmbed(statembed)
-
-}}})}})})
+})})
