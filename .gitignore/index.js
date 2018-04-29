@@ -335,6 +335,31 @@ bot.on("message", function(message) {
                     return message.channel.send(error.stack);
                 }
             break;
+            case "serverlist":
+            var replyss = [
+                '#F407FC', 
+                '#034EEF',
+                '#09F4D1',
+                '#09F14E',
+                '#E7EF07',
+                '#F5A718',
+                '#FB4B06',
+                '#FB2702',
+                '#F6F4F3',
+                '#201F1F'
+            ];
+        
+            let reponses = (replyss[Math.floor(Math.random() * replyss.length)])
+                  var servlist_embed = new Discord.RichEmbed()
+                      .setColor(reponses)
+                      .setFooter("Xonaria", bot.user.avatarURL)
+                      .setThumbnail(bot.user.avatarURL)
+                      .setTimestamp()
+                      .setTitle("Server Info")
+                      .setDescription("Je me trouve sur **" + bot.guilds.size + "** serveurs et compte au total **" + bot.users.size + "** utilisateurs !")
+                      .addField("**Liste des serveurs sur lequel je me trouve**", bot.guilds.map(r => r.name + ` | **${r.memberCount}** membres`))
+                      message.channel.send(servlist_embed)
+            break;
             case "tempsondage":
                 let argson = message.content.split(" ").slice(1);
                 let thingToEchon = argson.join(" ")
