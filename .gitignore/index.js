@@ -107,7 +107,7 @@ bot.on("message", function(message) {
                     .addField(`Divertissement`, "` \nx-8ball \nx-sondage-t \nx-globaltchat`", true)
                     .addField(`Image`, "`x-chat`", true)
                     .addField(`Musique`, "`x-play \nx-skip \nx-stop`", true)
-                    .addField("Utilitaire", "` x-avatar \nx-profil \nx-serverinfo \nx-botinfo \nx-id \nx-ping \nx-invite \nx-support`", true)
+                    .addField("Utilitaire", "` x-avatar \nx-serverlist \nx-serverinfo \nx-botinfo \nx-id \nx-ping \nx-invite \nx-support`", true)
                     .addField(`Modération`, "` x-ban \nx-kick \nx-clear`", true)
                     .addField(`Administration`, "` x-sondage \nx-say`", true)
                     .addField(`Support`, "[[Clique ici pour accéder au support du Bot]](https://discordapp.com/invite/DRuyt7Q)", true)
