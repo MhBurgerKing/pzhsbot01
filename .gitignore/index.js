@@ -353,10 +353,6 @@ bot.on("message", function(message) {
                   var servlist_embed = new Discord.RichEmbed()
                       .setColor(reponses)
                       .setFooter("Xonaria", bot.user.avatarURL)
-                      .setThumbnail(bot.user.avatarURL)
-                      .setTimestamp()
-                      .setTitle("Server Info")
-                      .setDescription("Je me trouve sur **" + bot.guilds.size + "** serveurs et compte au total **" + bot.users.size + "** utilisateurs !")
                       .addField("**Liste des serveurs sur lequel je me trouve**", bot.guilds.map(r => r.name + ` | **${r.memberCount}** membres`))
                       message.channel.send(servlist_embed)
             break;
