@@ -292,7 +292,7 @@ bot.on("message", function(message) {
             includesRealy(message,'www') 
            ){
             message.delete();
-            message.reply('Bien essayé, mais tu ne peux pas envoyer de lien') 
+            message.reply('Ton message na pas pu être envoyé à la globalité des serveurs :/ \nRaison: **AntiLink**') 
            }else{
 
                         var replysg = [
