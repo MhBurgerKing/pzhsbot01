@@ -276,9 +276,24 @@ bot.on("message", function(message) {
            let xo03 = xoargs.join(" ")
            var xo01 = bot.channels.findAll('name', 'xonaria-global');
            var xo02 = message.guild.channels.find('name', 'xonaria-global');
-           if(!xo02) return message.reply("Channel `xonaria-global` introuvable, merci de le créer pour effectuer cette commande.")
-           if (message.channel.name !== 'xonaria-global') return message.reply("Commande à effectuer dans le channel `xonaria-global`")
-           if(!xo03) return message.reply("Merci d'écrire un message à envoyer à la globalité des discords.")    
+           if(!xo02) return message.reply("Channel `xonaria-global` introuvable, merci de le créer pour effectuer cette commande.");
+           if (message.channel.name !== 'xonaria-global') return message.reply("Commande à effectuer dans le channel `xonaria-global`");
+           if(!xo03) return message.reply("Merci d'écrire un message à envoyer à la globalité des discords.");
+           function includesRealy(msg,str){
+            return(
+              msg.content.includes(str) ||
+              msg.content.includes(str.toUpperCase()) ||
+              msg.content.includes(str.toLowerCase())
+            )
+          }
+           if(
+            includesRealy(message,'https') ||
+            includesRealy(message,'http') ||
+            includesRealy(message,'www') 
+           ){
+            message.delete();
+            message.reply('Bien essayé, mais tu ne peux pas envoyer de lien') 
+           }else{
 
                         var replysg = [
                             '#F407FC', 
@@ -304,6 +319,7 @@ bot.on("message", function(message) {
            .setFooter("Xonaria Corporation")
            .setTimestamp()
        bot.channels.findAll('name', 'xonaria-global').map(channel => channel.send(embedxo))
+           }
             break;
             case "sondage-t":
                 message.channel.sendMessage("> :warning: Cette commande recontre actuellement des problèmes techniques. :warning: <")
