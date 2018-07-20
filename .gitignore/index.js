@@ -104,7 +104,7 @@ bot.on("message", function(message) {
                         let reponseh = (replysh[Math.floor(Math.random() * replysh.length)])
                 var embede = new Discord.RichEmbed()
                     .setDescription(`${message.author.username}, Voici la liste des commandes:`)
-                    .addField(`Divertissement`, "` \nx-8ball \nx-sondage-t \nx-globaltchat`", true)
+                    .addField(`Divertissement`, "` \nx-8ball \nx-sondage-t \nx-vcs`", true)
                     .addField(`Image`, "`x-chat`", true)
                     .addField(`Musique`, "`x-play \nx-skip \nx-stop`", true)
                     .addField("Utilitaire", "` x-avatar \nx-serverlist \nx-serverinfo \nx-botinfo \nx-id \nx-ping \nx-invite \nx-support`", true)
@@ -271,7 +271,7 @@ bot.on("message", function(message) {
                    .setColor("0x81DAF5")
                message.channel.sendEmbed(embedbot)
            break;
-           case "globaltchat":
+           case "vcs":
            let xoargs = message.content.split(" ").slice(1);
            let xo03 = xoargs.join(" ")
            var xo01 = bot.channels.findAll('name', 'xonaria-global');
