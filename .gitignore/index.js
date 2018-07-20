@@ -289,7 +289,10 @@ bot.on("message", function(message) {
            if(
             includesRealy(message,'https') ||
             includesRealy(message,'http') ||
-            includesRealy(message,'www') 
+            includesRealy(message,'www') ||
+            includesRealy(message,'.com') ||
+            includesRealy(message,'.fr') ||
+            includesRealy(message,'.net')
            ){
             message.delete();
             message.reply('Ton message na pas pu être envoyé à la globalité des serveurs :/ \nRaison: **AntiLink**') 
