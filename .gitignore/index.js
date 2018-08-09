@@ -208,22 +208,17 @@ bot.on("message", function(message) {
            let tte = argsed.join(" ")
            if (!tte){
                return message.reply("Merci de poser une question. :8ball:")};
+               function includesRealy(msg,str){
+                return(
+                  msg.content.includes(str) ||
+                  msg.content.includes(str.toUpperCase()) ||
+                  msg.content.includes(str.toLowerCase())
+                )
+              }
+               if(
+                includesRealy(message,'?') 
+               ){
 
-                        var replys8 = [
-                            '#F407FC', 
-                            '#034EEF',
-                            '#09F4D1',
-                            '#09F14E',
-                            '#E7EF07',
-                            '#F5A718',
-                            '#FB4B06',
-                            '#FB2702',
-                            '#F6F4F3',
-                            '#201F1F'
-                        ];
-                    
-                        let reponse8 = (replys8[Math.floor(Math.random() * replys8.length)])
-    
                var replys = [
                "Oui.",
                "Non.",
@@ -237,8 +232,14 @@ bot.on("message", function(message) {
                .setDescription(":8ball: 8ball")
                .addField("Question", tte)
                .addField("Réponse", reponse)
-               .setColor(reponse8)
+               .setColor("0x40FF00")
            message.channel.sendEmbed(ballembed)
+
+            }else{
+                message.delete();
+                message.reply('Tu dois poser une question !') 
+
+            }
                break;
            case "id":
                var idembed = new Discord.RichEmbed()
