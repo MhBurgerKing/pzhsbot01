@@ -236,7 +236,6 @@ bot.on("message", function(message) {
            message.channel.sendEmbed(ballembed)
 
             }else{
-                message.delete();
                 message.reply('Tu dois poser une question !') 
 
             }
