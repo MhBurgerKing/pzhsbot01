@@ -12,18 +12,6 @@ const cooldown = new Set();
 bot.login(process.env.TOKEN);
 db.defaults({ histoires: [], xp: []}).write()
 
-function changing_status() {
-    let status = ['x-help pour les commandes', 'By PZH#8058', 'YT: PZH', 'Version 1.0.1']
-    let random = status[Math.floor(Math.random() * status.length)]
-    bot.user.setActivity(random)
-}
-
-
-bot.on("ready", () => {
-    console.log(`${bot.user.username} est en ligne sur ${bot.guilds.size} serveurs Number of Users : ${bot.users.size}`);
-    setInterval(changing_status, 10000);
-})
-
 function play(connection, message) {
     var server = servers[message.guild.id];
 
@@ -40,7 +28,6 @@ var servers = {};
 
 
 bot.on("message", function(message) {
-    const prefix = ("x-");
     if (message.author.equals(bot.user)) return;
     
     if (!message.content.startsWith(prefix)) return;
