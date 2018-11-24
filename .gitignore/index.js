@@ -9,29 +9,20 @@ const adapter = new FileSync('database.json');
 const db = low(adapter);
 const talkedRecently = new Set();
 const cooldown = new Set();
-bot.login(process.env.TOKEN);
+bot.login(process.env.token);
 db.defaults({ histoires: [], xp: []}).write()
 
-bot.on("ready", function() {
-    bot.user.setActivity(`x-help | ${bot.guilds.size} serveurs | ${bot.users.size} utilisateurs`)
-    console.log("Connected");
+function changing_status() {
+    let status = ['x-help pour les commandes.', 'By PZH#8058 | YT: PZH', 'Web: http://pzhcodage.ga', 'Version 1.0.1']
+    let random = status[Math.floor(Math.random() * status.length)]
+    bot.user.setActivity(random)
+}
 
+
+bot.on("ready", () => {
+    console.log(`${bot.user.username} est en ligne sur ${bot.guilds.size} serveurs Ndu : ${bot.users.size}`);
+    setInterval(changing_status, 5000);
 })
-
-function play(connection, message) {
-    var server = servers[message.guild.id];
-
-    server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
-
-    server.queue.shift();
-
-    server.dispatcher.on("end", function() {
-        if (server.queue[0]) play(connection, message);
-        else connection.disconnect();
-    });
-
-var servers = {};
-
 
 bot.on("message", function(message) {
     if (message.author.equals(bot.user)) return;
@@ -41,43 +32,6 @@ bot.on("message", function(message) {
     var args = message.content.substring(prefix.length).split(" ");
     
     switch (args[0].toLowerCase()) {
-        case "play":
-        var argsplay = message.content.substring(prefix.length).split(" ");
-            if (!argsplay[1]) {
-                message.channel.sendMessage("Merci d'envoyer le lien.");
-                return;
-            }
-
-            if (!message.member.voiceChannel) {
-                message.channel.sendMessage("Tu dois être dans un channel vocal.");
-                return;
-            }
-
-            if(!servers[message.guild.id]) servers[message.guild.id] = {
-                queue: []
-            };
-
-            var server = servers[message.guild.id];
-
-            server.queue.push(argsplay[1]);
-
-            if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-                play(connection, message);
-                message.channel.send("Lancement de votre musique. \n En cas de problème, vérifier si c'est un lien ( et non un teste ), si celle-ci n'a pas de copyright ou est correcte.")
-            });
-            break;
-        case "skip":
-            var server = servers[message.guild.id];
-
-            if (server.dispatcher) server.dispatcher.end();
-            message.channel.send("Musique skipé !\nEn cas de problème, vérifier si c'est un lien ( et non un teste ), si celle-ci n'a pas de copyright ou est correcte.")
-            break;
-        case "stop":
-            var server = servers[message.guild.id];
-
-            if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
-            message.channel.send("Musique arrêté.")
-            break;
             case "avatar":
             if (!message.mentions.users.first()) return message.channel.send("Merci de mentionner un utilisateur")
                 let user = message.mentions.users.first() ? message.mentions.users.first() : message.author
@@ -106,9 +60,9 @@ bot.on("message", function(message) {
                         let reponseh = (replysh[Math.floor(Math.random() * replysh.length)])
                 var embede = new Discord.RichEmbed()
                     .setDescription(`${message.author.username}, Voici la liste des commandes:`)
-                    .addField(`Divertissement`, "` \nx-8ball \nx-sondage-t \nx-vcs`", true)
+                    .addField(`Divertissement`, "` \nx-8ball \nx-vcs`", true)
                     .addField(`Image`, "`x-chat`", true)
-                    .addField(`Musique`, "`x-play \nx-skip \nx-stop`", true)
+                    .addField(`Musique **OFFLINE**`, "`x-play \nx-skip \nx-stop`", true)
                     .addField("Utilitaire", "` x-avatar \nx-serverlist \nx-serverinfo \nx-botinfo \nx-id \nx-ping \nx-invite \nx-support`", true)
                     .addField(`Modération`, "` x-ban \nx-kick \nx-clear`", true)
                     .addField(`Administration`, "` x-sondage \nx-say`", true)
@@ -326,8 +280,33 @@ bot.on("message", function(message) {
        bot.channels.findAll('name', 'xonaria-global').map(channel => channel.send(embedxo))
            }
             break;
-            case "sondage-t":
-                message.channel.sendMessage("> :warning: Cette commande recontre actuellement des problèmes techniques. :warning: <")
+            case "updatev":
+            let upargs = message.content.split(" ").slice(1);
+            let up03 = upargs.join(" ")
+            var up01 = bot.channels.findAll('name', 'xonaria-global');
+            var up02 = message.guild.channels.find('name', 'xonaria-global');
+            if(!up02) return message.reply("Channel `xonaria-global` introuvable, merci de le créer pour effectuer cette commande.");
+            if (message.channel.name !== 'xonaria-global') return message.reply("Commande à effectuer dans le channel `xonaria-global`");
+            if(!up03) return message.reply("Merci d'écrire une update à envoyer à la globalité des discords.");
+            if (message.author.id !== '330762245921439754') {
+                message.send("Tu n'as pas accès à cette commande.")
+            }else{
+
+            var replysg = [
+                '#00995c'
+            ];
+        
+            let reponseg = (replysg[Math.floor(Math.random() * replysg.length)])
+ 
+        var embedxo = new Discord.RichEmbed()
+        .setColor(reponseg)
+        .setTitle("| Version Update |")
+        .setDescription(`Xonaria est désormais version ${up03} `)
+        .setFooter("Update version Xonaria")
+        .setTimestamp()
+        bot.channels.findAll('name', 'xonaria-global').map(channel => channel.send(embedxo))
+        }
+
             break;
             case "chat":
                    try {
@@ -399,7 +378,7 @@ bot.on("message", function(message) {
         }
 
 
-                }}};
+};
 
 
-}})}
+}})
