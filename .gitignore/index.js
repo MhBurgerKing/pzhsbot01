@@ -221,9 +221,9 @@ bot.on("message", function(message) {
                    .setDescription("Information")
                    .addField("Nombre de discord sur lequel je suis", `${bot.guilds.size} serveur(s)`)
                    .addField(`Nombre d'utilisateur(s) au total sur les ${bot.guilds.size} serveur(s) ou je suis`, `${bot.users.size} utilisateur(s)`)
-                   .addField("Crée par", "[PZH#8058](https://www.youtube.com/c/pzhcodage)")
+                   .addField("Crée par", "[PZH#8058](http://pzhcodage.ga)")
                    .addField("Crée le", "31/03/2018")
-                   .addField("Version", "1.0.0")
+                   .addField("Version", "1.0.1")
                    .setColor("0x81DAF5")
                message.channel.sendEmbed(embedbot)
            break;
