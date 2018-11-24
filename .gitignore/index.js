@@ -27,9 +27,18 @@ function play(connection, message) {
 
 var servers = {};
 
-bot.on("ready", function() {
-    bot.user.setActivity(`x-help | ${bot.guilds.size} serveurs | ${bot.users.size} utilisateurs`)
-    console.log("Connected");
+function changing_status() {
+    let status = ['x-help pour les commandes', 'By PZH#8058', 'YT: PZH', 'Version 1.0.1']
+    let random = status[Math.floor(Math.random() * status.length)]
+    bot.user.setActivity(random)
+}
+
+
+bot.on("ready", () => {
+    console.log(`${bot.user.username} est en ligne sur ${bot.guilds.size} serveurs Number of Users : ${bot.users.size}`);
+    setInterval(changing_status, 10000);
+})
+
 
 bot.on("message", function(message) {
     if (message.author.equals(bot.user)) return;
