@@ -16,6 +16,8 @@ bot.on("ready", function() {
     bot.user.setActivity(`x-help | ${bot.guilds.size} serveurs | ${bot.users.size} utilisateurs`)
     console.log("Connected");
 
+})
+
 function play(connection, message) {
     var server = servers[message.guild.id];
 
@@ -400,4 +402,4 @@ bot.on("message", function(message) {
 };
 
 
-}})}})
+}})}
