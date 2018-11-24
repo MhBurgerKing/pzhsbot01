@@ -40,6 +40,7 @@ var servers = {};
 
 
 bot.on("message", function(message) {
+    const prefix = ("x-");
     if (message.author.equals(bot.user)) return;
     
     if (!message.content.startsWith(prefix)) return;
