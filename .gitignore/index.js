@@ -142,7 +142,7 @@ bot.on("message", function(message) {
                }
                kickMember.kick().then(member => {
                    message.reply(`${member.user.username} a été expulsé avec succès.`).catch(console.error);
-                   message.guild.channels.find("name", "general").send(`**${member.user.username}** a été expulsé du discord par **${message.author.username}**`)
+                   message.channel.send(`**${member.user.username}** a été expulsé du discord par **${message.author.username}**`)
                }).catch(console.error)
            break;
            case "ban":
@@ -156,7 +156,7 @@ bot.on("message", function(message) {
            if (!member) return message.reply("Merci de mentionner l'utilisateur à bannir.");
            member.ban().then(member => {
                message.reply(`${member.user.username} a été banni avec succès.`).catch(console.error);
-               message.guild.channels.find("name", "general").send(`**${member.user.username}** a été banni du discord par **${message.author.username}**`)
+               message.channel.send(`**${member.user.username}** a été banni du discord par **${message.author.username}**`)
            }).catch(console.error)
            break;
            case "8ball":
@@ -289,7 +289,7 @@ bot.on("message", function(message) {
             if (message.channel.name !== 'xonaria-global') return message.reply("Commande à effectuer dans le channel `xonaria-global`");
             if(!up03) return message.reply("Merci d'écrire une update à envoyer à la globalité des discords.");
             if (message.author.id !== '330762245921439754') {
-                message.send("Tu n'as pas accès à cette commande.")
+                message.channel.send("Tu n'as pas accès à cette commande.")
             }else{
 
             var replysg = [
