@@ -12,6 +12,10 @@ const cooldown = new Set();
 bot.login(process.env.TOKEN);
 db.defaults({ histoires: [], xp: []}).write()
 
+bot.on("ready", function() {
+    bot.user.setActivity(`x-help | ${bot.guilds.size} serveurs | ${bot.users.size} utilisateurs`)
+    console.log("Connected");
+
 function play(connection, message) {
     var server = servers[message.guild.id];
 
@@ -25,10 +29,6 @@ function play(connection, message) {
     });
 
 var servers = {};
-
-bot.on("ready", function() {
-    bot.user.setActivity(`x-help | ${bot.guilds.size} serveurs | ${bot.users.size} utilisateurs`)
-    console.log("Connected");
 
 
 bot.on("message", function(message) {
