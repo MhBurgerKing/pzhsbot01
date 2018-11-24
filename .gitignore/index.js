@@ -32,6 +32,81 @@ bot.on("message", function(message) {
     var args = message.content.substring(prefix.length).split(" ");
     
     switch (args[0].toLowerCase()) {
+           case "villefortnite":
+           let argftn = message.content.split(" ").slice(1);
+            let ftn = argftn.join(" ")
+                var replys = [
+                `Alors tu vas aller à... **Junk Juction**!`,
+                "Alors tu vas aller à... **Haunted Hills **!",
+                "Alors tu vas aller à... **Pleasant Park**!",
+                "Alors tu vas aller à... **Snobby Shores**!",
+                "Alors tu vas aller à... **Viking Village**!",
+                "Alors tu vas aller à... **Greasy Grove**!",
+                "Alors tu vas aller à... **Shifty Shafts**!",
+                "Alors tu vas aller à... **Flush Factory**!",
+                "Alors tu vas aller à... **Tilted Towers**!",
+                "Alors tu vas aller à... **Loot Lake**!",
+                "Alors tu vas aller à... **Lazy Links**!",
+                "Alors tu vas aller à... **Tomato Temple**!",
+                "Alors tu vas aller à... **Risky Reels**!",
+                "Alors tu vas aller à... **Wailing Woods**!",
+                "Alors tu vas aller à... **Dusty Divot**!",
+                "Alors tu vas aller à... **Lonely Lodge**!",
+                "Alors tu vas aller à... **Retail Row**!",
+                "Alors tu vas aller à... **Salty Springs**!",
+                "Alors tu vas aller à... **Fatal Fields**!",
+                "Alors tu vas aller à... **Lucky Landing**!",
+                "Alors tu vas aller à... **Paradise Palms**!",
+                "Alors tu vas aller à... **Paradise Palms**!",
+                "Alors tu vas aller à... **Chaise**!",
+                "Alors tu vas aller à... **Villa des héros**!",
+                "Alors tu vas aller à... **Base des méchants**!",
+                "Alors tu vas aller à... **Motel**!",
+                "Alors tu vas aller à... **Station Service**!",
+                "Alors tu vas aller à... **Dépot**!",
+                "Alors tu vas aller à... **Usine de Flush Factory**!",
+                "Alors tu vas aller à... **Piscine**!",
+                ];
+            
+                let ftnreponse = (replys[Math.floor(Math.random() * replys.length)])
+                var ftnembed = new Discord.RichEmbed()
+                .setTitle("Choix aléatoire ville fortnite")
+                .setDescription(`${ftnreponse}`)
+                .setColor("RANDOM")
+                .setImage("https://pzhcodage.webnode.fr/_files/200000045-df015dffac/mapfortnite.png")
+                .setFooter("Tu as la map de fortnite à portée de main si tu ne sais pas ou se situe un endroit. ^^")
+            message.channel.sendEmbed(ftnembed)
+            break;
+            case "fortniteobjectif":
+            let argftn2 = message.content.split(" ").slice(1);
+            let ftn2 = argftn2.join(" ")
+                var replys = [
+                `Ton objectif est **de faire TOP 1**!`,
+                `Ton objectif est **de tuer un joueur au snipe**!`,
+                `Ton objectif est **de tuer un joueur au piège**!`,
+                `Ton objectif est **de tuer un joueur à la grenade**!`,
+                `Ton objectif est **de faire 3 kills en une partie**!`,
+                `Ton objectif est **de faire 5 kills en une partie**!`,
+                `Ton objectif est **de faire 10 kills en une partie**!`,
+                `Ton objectif est **de faire au moins top 10 5 kills**!`,
+                `Ton objectif est **de tuer un joueur grace à une chute**!`,
+                `Ton objectif est **de faire 3 kills en moins de 3 minutes**!`,
+                `Ton objectif est **de faire top 50 5 kills**!`,
+                `Ton objectif est **de faire une partie sans construction avec au moins 1 kill**!`,
+                `Ton objectif est **de faire une partie sans arme à distance avec au moins 1 kill**!`,
+                `Ton objectif est **de faire une partie sans arme de corps à corps avec au moins 1 kill**!`,
+                `Ton objectif est **de faire une partie sans arme explosive avec au moins 1 kill**!`,
+                `Ton objectif est **de tuez un joueur à la pioche**!`,
+                `Ton objectif est **de faire une partie uniquement avec la pioche avec au moins 1 kill**!`,
+
+                ];
+                let fttnreponse = (replys[Math.floor(Math.random() * replys.length)])
+                var ftnembed2 = new Discord.RichEmbed()
+                .setTitle("Objectif aléatoire fortnite")
+                .setDescription(`${fttnreponse}`)
+                .setColor("RANDOM")
+            message.channel.sendEmbed(ftnembed2)
+            break;
             case "avatar":
             if (!message.mentions.users.first()) return message.channel.send("Merci de mentionner un utilisateur")
                 let user = message.mentions.users.first() ? message.mentions.users.first() : message.author
@@ -60,7 +135,7 @@ bot.on("message", function(message) {
                         let reponseh = (replysh[Math.floor(Math.random() * replysh.length)])
                 var embede = new Discord.RichEmbed()
                     .setDescription(`${message.author.username}, Voici la liste des commandes:`)
-                    .addField(`Divertissement`, "` \nx-8ball \nx-vcs`", true)
+                    .addField(`Divertissement`, "` \nx-8ball \nx-vcs \nx-villefortnite \nx-fortniteobjectif`", true)
                     .addField(`Image`, "`x-chat`", true)
                     .addField(`Musique **OFFLINE**`, "`x-play \nx-skip \nx-stop`", true)
                     .addField("Utilitaire", "` x-avatar \nx-serverlist \nx-serverinfo \nx-botinfo \nx-id \nx-ping \nx-invite \nx-support`", true)
@@ -280,7 +355,7 @@ bot.on("message", function(message) {
        bot.channels.findAll('name', 'xonaria-global').map(channel => channel.send(embedxo))
            }
             break;
-            case "updatev":
+            case "annonce":
             let upargs = message.content.split(" ").slice(1);
             let up03 = upargs.join(" ")
             var up01 = bot.channels.findAll('name', 'xonaria-global');
@@ -300,9 +375,9 @@ bot.on("message", function(message) {
  
         var embedxo = new Discord.RichEmbed()
         .setColor(reponseg)
-        .setTitle("| Version Update |")
-        .setDescription(`Xonaria est désormais version ${up03} `)
-        .setFooter("Update version Xonaria")
+        .setTitle("| Annonce |")
+        .setDescription(`${up03}`)
+        .setFooter("Annonce Xonaria")
         .setTimestamp()
         bot.channels.findAll('name', 'xonaria-global').map(channel => channel.send(embedxo))
         }
