@@ -460,7 +460,7 @@ bot.on("message", function(message) {
 
 bot.on('message', message => {
 
-    if (message.content === prefix + "test011"){
+    if (message.content === prefix + "serverlist"){
     if (!message.guild.member(bot.user).hasPermission('SEND_MESSAGES')) return;
 
     let tosend = [];
