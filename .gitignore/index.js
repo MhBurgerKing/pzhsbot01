@@ -13,7 +13,7 @@ bot.login(process.env.TOKEN);
 db.defaults({ histoires: [], xp: []}).write()
 
 function changing_status() {
-    let status = ['x-help pour les commandes.', 'By PZH#8058 | YT: PZH', 'Web: http://pzhcodage.ga', 'Version 1.0.1']
+    let status = ['x-help pour les commandes.', 'By PZH#8058 | YT: PZH', 'Web: http://pzhcodage.ga', 'Version 1.0.1', '${bot.guilds.size} serveurs | ${bot.users.size} utilisateurs']
     let random = status[Math.floor(Math.random() * status.length)]
     bot.user.setActivity(random)
 }
@@ -479,8 +479,7 @@ for (let i = 0; i < tosend.length;) {
 }
     let page = 1;
 const embed = new Discord.RichEmbed()
-    .setTitle("Serveurs dans lequel je suis.")
-    .setColor('FFFFFF')
+    .setTitle(`Liste des serveurs (${bot.guilds.size}) sur lequel je suis.`)
     .setFooter(`Page: ${page}/${pages.length}`)
     .setDescription(pages[page-1])
 message.channel.send(embed).then(msg => {
