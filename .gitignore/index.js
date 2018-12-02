@@ -13,7 +13,7 @@ bot.login(process.env.TOKEN);
 db.defaults({ histoires: [], xp: []}).write()
 
 function changing_status() {
-    let status = ['x-help pour les commandes.', 'By PZH#8058 | YT: PZH', 'Web: http://pzhcodage.ga', 'Version 1.0.1', `${bot.guilds.size} serveurs | ${bot.users.size} utilisateurs`]
+    let status = ['x-help pour les commandes.', 'x-help | By PZH#8058 | YT: PZH', 'Web: http://pzhcodage.ga', 'x-help | Version 1.0.1', `x-help | ${bot.guilds.size} serveurs | ${bot.users.size} utilisateurs`]
     let random = status[Math.floor(Math.random() * status.length)]
     bot.user.setActivity(random)
 }
