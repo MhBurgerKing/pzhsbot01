@@ -288,7 +288,7 @@ bot.on("message", function(message) {
                break;
            case "invite":
                var invembed = new Discord.RichEmbed()
-               .setDescription("Invite moi sur ton serveur: https://discordapp.com/oauth2/authorize?client_id=427432036152770560&scope=bot&permissions=359005431")
+               .setDescription(`(Clique sur ce message pour m'inviter!)[https://discordapp.com/oauth2/authorize?client_id=427432036152770560&permissions=359005431&scope=bot&response_type=code&redirect_uri=https%3A%2F%2Fpzhcodage.webnode.fr%2Fmerci%2F]`)
               message.channel.sendEmbed(invembed)
            break;
            case "botinfo":
