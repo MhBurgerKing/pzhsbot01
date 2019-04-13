@@ -72,7 +72,7 @@ bot.on("message", function(message) {
                 .setTitle("Choix aléatoire ville fortnite")
                 .setDescription(`${ftnreponse}`)
                 .setColor("RANDOM")
-                .setImage("https://pzhcodage.webnode.fr/_files/200000045-df015dffac/mapfortnite.png")
+                .setImage("https://www.eclypsia.com/content/Fortnite/Saison8/Fortnite_MapComplete_Saison8.jpg")
                 .setFooter("Tu as la map de fortnite à portée de main si tu ne sais pas ou se situe un endroit. ^^")
             message.channel.sendEmbed(ftnembed)
             break;
