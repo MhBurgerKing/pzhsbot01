@@ -62,7 +62,8 @@ bot.on("message", function(message) {
                 "Alors tu vas aller à... **Base des méchants (détruite)**!",
                 "Alors tu vas aller à... **Bloc**!",
                 "Alors tu vas aller à... **Station Service**!",
-                "Alors tu vas aller à... **Dépot**!",
+                "Alors tu vas aller à... **Polar Peak**!",
+                "Alors tu vas aller à... **Frosty Flights**!",
                 "Alors tu vas aller à... **Usine de Flush Factory (à moitié enneigé)**!",
                 "Alors tu vas aller à... **Piscine**!",
                 ];
