@@ -511,3 +511,55 @@ message.channel.send(embed).then(msg => {
     });
 
 }})
+
+client.on("message", (message) => {
+
+    if (message.content.startsWith(prefix + "skip")) {
+        var server = servers[message.guild.id];
+
+        if (server.dispatcher) server.dispatcher.end();
+    }
+    if (message.content.startsWith(prefix + "stop")) {
+        var server = servers[message.guild.id];
+
+        if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
+    }
+
+    if (message.content.startsWith(prefix + "play")) {
+        function includesRealy(msg,str){
+            return(
+              msg.content.includes(str) ||
+              msg.content.includes(str.toUpperCase()) ||
+              msg.content.includes(str.toLowerCase())
+            )
+          }
+if(
+    includesRealy(message,'https') ||
+    includesRealy(message,'http') 
+    ){
+
+        var args0 = message.content.substring(prefix.length).split(" ");
+        if (!args0[1]) {
+            message.channel.sendMessage("Merci d'envoyer le lien youtube du son que vous souhaitez écouter.");
+            return;
+        }
+
+        if (!message.member.voiceChannel) {
+            message.channel.sendMessage("Tu dois être connecté dans un channel vocal.");
+            return;
+        }
+
+        if(!servers[message.guild.id]) servers[message.guild.id] = {
+            queue: []
+        };
+
+        var server = servers[message.guild.id];
+
+        server.queue.push(args0[1]);
+          if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
+            play(connection, message);
+          });
+}else{
+    message.channel.send("Afin que la musique soit lancée, vous devez faire bp!play **lien youtube**")
+}
+    }});
