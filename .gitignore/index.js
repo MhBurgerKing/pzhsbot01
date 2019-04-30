@@ -514,6 +514,22 @@ message.channel.send(embed).then(msg => {
 
 bot.on("message", (message) => {
 
+function play(connection, message) {
+    var server = servers[message.guild.id];
+
+    server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
+
+    server.queue.shift();
+
+    server.dispatcher.on("end", function() {
+        if (server.queue[0]) play(connection, message);
+        else connection.disconnect();
+    });
+}
+
+var servers = {};
+
+
     if (message.content.startsWith(prefix + "skip")) {
         var server = servers[message.guild.id];
 
