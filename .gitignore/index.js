@@ -512,7 +512,7 @@ message.channel.send(embed).then(msg => {
 
 }})
 
-client.on("message", (message) => {
+bot.on("message", (message) => {
 
     if (message.content.startsWith(prefix + "skip")) {
         var server = servers[message.guild.id];
