@@ -141,7 +141,7 @@ bot.on("message", function(message) {
                     .addField("Utilitaire", "` x-avatar \nx-serverlist \nx-serverinfo \nx-botinfo \nx-id \nx-ping \nx-invite \nx-support`", true)
                     .addField(`Modération`, "` x-ban \nx-kick \nx-clear`", true)
                     .addField(`Administration`, "` x-sondage \nx-say`", true)
-                    .addField(`Support`, "[[Clique ici pour accéder au support du Bot]](https://discordapp.com/invite/DRuyt7Q)", true)
+                    .addField(`Support`, "[[Clique ici pour accéder au support du Bot]](http://q.gs/EpDaq)", true)
                     .setFooter(`Xonaria`)
                     .setTimestamp()
                     .setColor(reponseh)
@@ -150,7 +150,7 @@ bot.on("message", function(message) {
             case "support":
                 var embedef = new Discord.RichEmbed()
                     .setDescription(`Support`)
-                    .addField(`Un problème avec le bot ? Ou vous voulez juste rejoindre le discord du créateur de celui-ci ?`, `[Clique ici pour rejoindre](https://discordapp.com/invite/DRuyt7Q)`, true)
+                    .addField(`Un problème avec le bot ? Ou vous voulez juste rejoindre le discord du créateur de celui-ci ?`, `[Clique ici pour rejoindre](http://q.gs/EpDaq)`, true)
                     .setFooter(`Xonaria`)
                     .setTimestamp()
                     .setColor("0xDF7401")
