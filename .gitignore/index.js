@@ -13,7 +13,7 @@ bot.login(process.env.TOKEN);
 db.defaults({ histoires: [], xp: []}).write()
 
 function changing_status() {
-    let status = ['x-help pour les commandes.', 'x-help | By PZH#8058 | YT: PZH', 'Web: http://pzhdevelopment.ga', 'x-help | Version 1.0.1', `x-help | ${bot.guilds.size} serveurs | ${bot.users.size} utilisateurs`]
+    let status = ['x-help pour les commandes.', 'x-help | By YouTube PZH#3333 | YT: PZH', 'Web: http://pzhdevelopment.ga', 'x-help | Version 1.0.1', `x-help | ${bot.guilds.size} serveurs | ${bot.users.size} utilisateurs`]
     let random = status[Math.floor(Math.random() * status.length)]
     bot.user.setActivity(random)
 }
@@ -296,7 +296,7 @@ bot.on("message", function(message) {
                    .setDescription("Information")
                    .addField("Nombre de discord sur lequel je suis", `${bot.guilds.size} serveur(s)`)
                    .addField(`Nombre d'utilisateur(s) au total sur les ${bot.guilds.size} serveur(s) ou je suis`, `${bot.users.size} utilisateur(s)`)
-                   .addField("Crée par", "[PZH#8058](http://pzhcodage.ga)")
+                   .addField("Crée par", "[YouTube PZH#3333](http://pzhcodage.ga)")
                    .addField("Crée le", "31/03/2018")
                    .addField("Version", "1.0.1")
                    .setColor("0x81DAF5")
