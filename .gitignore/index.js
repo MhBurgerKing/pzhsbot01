@@ -277,7 +277,8 @@ bot.on("message", function(message) {
                message.channel.sendEmbed(idembed)
                break;
            case "ping":
-               message.channel.sendMessage('Temp de latence avec le serveur: `' + `${message.createdTimestamp - Date.now()}` + ' ms`');
+              var resMsg = await msg.channel.send('Merci de patienter...');
+              resMsg.edit('Votre ping est de' + Math.round((resMsg.createdTimestamp - msg.createdTimestamp) - bot.ping)));
                break;
            case "clear":
            if (message.member.hasPermission("MANAGE_MESSAGES")) {
