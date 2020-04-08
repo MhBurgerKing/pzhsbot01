@@ -409,105 +409,13 @@ bot.on("message", function(message) {
                     return message.channel.send(error.stack);
                 }
             break;
-            case "tempsondage":
-                let argson = message.content.split(" ").slice(1);
-                let thingToEchon = argson.join(" ")
-                if (!thingToEchon) return message.reply("Merci d'envoyer une question pour le sondage temporaire de 5 minutes")
-                if (!message.guild.channels.find("name", "sondage-temp")) return message.reply("Erreur: le channel `sondage-temp` est introuvable, il est nécéssaire de le créer pour effectuer cette commande.");
-                if (message.channel.name !== 'sondage-temp') { return message.reply("Cette commande ne se fait pas ici, elle se fait dans `sondage-temp`");
-                }else{
-                message.delete()
-                if (cooldown.has(message.author.id)) return message.author.send(`**[ Command __tempsondage__ via le discord __${message.guild.name}__ ]** Veuillez attendre 12 heures avant de re-éffectuer cette commande.`);
-            
-       
-                cooldown.add(message.author.id);
-
-                setTimeout(() => {
-
-                cooldown.delete(message.author.id);
-
-                }, 43200000);
-
-               if (!cooldown.has(message.author.id)) {
-                setTimeout(() => message.guild.channels.find("name", "sondage-temp").send(`Le sondage de ${message.author.username} vient d'expirer.`), 300000)
-                var embedeeeon = new Discord.RichEmbed()
-                    .setDescription("Sondage Temporaire")
-                    .addField(thingToEchon, "Répondre avec :white_check_mark: ou :x:")
-                    .addField("Fin du sondage dans", "Moin de 5 minutes")
-                    .setColor("0xFF00FF")
-                    .setFooter(`Requête de ${message.author.username}`)
-                    .setTimestamp()
-                message.channel.sendEmbed(embedeeeon)
-                .then(function (message) {
-                message.react("✅")
-                message.react("❌")
-                }).catch(function() {
-                });
-            break;
-                    
-
+ 
+             
         }
 
 
 };
 
-
-}})
-
-bot.on('message', message => {
-
-    if (message.content === prefix + "serverlist"){
-    if (!message.guild.member(bot.user).hasPermission('SEND_MESSAGES')) return;
-
-    let tosend = [];
-    bot.guilds.forEach((guild, number) => { tosend.push(`\`${guild.name}\` | ${guild.memberCount} membres`) })
-
-
-    let pages = [];
-for (let i = 0; i < tosend.length;) {
-    if ((i + 9) > tosend.length) {
-        pages.push(tosend.slice(i, (i + 9) - ((i + 9) - tosend.length)).join("\n"));
-        break;
-    } else {
-        pages.push(tosend.slice(i, i + 9).join("\n"));
-        i += 9
-    };
-}
-    let page = 1;
-const embed = new Discord.RichEmbed()
-    .setTitle(`Liste des serveurs (${bot.guilds.size}) sur lequel je suis.`)
-    .setFooter(`Page: ${page}/${pages.length}`)
-    .setDescription(pages[page-1])
-message.channel.send(embed).then(msg => {
-    if (!message.guild.member(bot.user).hasPermission('ADD_REACTIONS')) return;
-        msg.react("◀").then(r => {
-            msg.react("▶")
-            
-            const backF = (reaction, user) => reaction.emoji.name === '◀' && user.id === message.author.id;
-            const ForF = (reaction, user) => reaction.emoji.name === '▶' && user.id === message.author.id;
-            
-            const back = msg.createReactionCollector(backF, { time: 180000 });
-            const For = msg.createReactionCollector(ForF, { time: 180000 });
-            
-            back.on('collect', async r => {
-                r.remove(message.author.id)
-                if (page === 1) return r.remove(message.author.id);
-                page--;
-                embed.setDescription(pages[page-1]);
-                embed.setFooter(`Page: ${page}/${pages.length}`);
-                msg.edit(embed);
-            });
-            
-            For.on('collect', async r => {
-                r.remove(message.author.id)
-                if (page === pages.length) return r.remove(message.author.id);
-                page++;
-                embed.setDescription(pages[page-1]);
-                embed.setFooter(`Page: ${page}/${pages.length}`);
-                msg.edit(embed);
-            });
-        });
-    });
 
 }})
 
